@@ -9,10 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import model.Arbitro;
-import model.ClubDeportivo;
-import model.DT;
-import model.Partido;
+import model.*;
 /**
  *
  * @author Emilio
@@ -26,6 +23,7 @@ public class Data {
     private List<DT> dts;
     private List<Arbitro> arbitros;
     private List<ClubDeportivo> clubes;
+    private List<Nacionalidad> nacionalidades;
     
     public Data()throws SQLException{
         c = new Conexion(
@@ -183,7 +181,7 @@ public class Data {
     }
     public DT getDT(int id) throws SQLException{
         DT dt=null;
-        query="";
+        query="select*from tbl_DirectorTecnico where id="+id+"";
         System.out.println(query);
         rs=c.ejecutarSelect(query);
         
@@ -203,7 +201,7 @@ public class Data {
     }
     public Arbitro getArbitro(int id) throws SQLException{
         Arbitro a=null;
-        query="";
+        query="select*from tbl_arbitro where id="+id+"";
         System.out.println(query);
         rs=c.ejecutarSelect(query);
         
@@ -221,7 +219,7 @@ public class Data {
     }
     public ClubDeportivo getClubDeportivo(int id) throws SQLException{
         ClubDeportivo cd=null;
-        query="";
+        query="select*from tbl_ClubDeportivo where id="+id+"";
         System.out.println(query);
         rs=c.ejecutarSelect(query);
         
@@ -232,6 +230,19 @@ public class Data {
         
         c.desconectar();        
         return cd;
+    }
+    public Nacionalidad getNacionalidad(int id) throws SQLException{
+        Nacionalidad n=null;
+        query="select*from tbl_pais where id="+id+"";
+        rs=c.ejecutarSelect(query);
+        
+        if(rs.next()){
+            n.setId(rs.getInt(1));
+            n.setPais(rs.getString(2));
+        }
+        
+        c.desconectar();
+        return n;
     }
     
     public List<Partido> getPartidos() throws SQLException{
@@ -325,6 +336,22 @@ public class Data {
         
         c.desconectar();
         return clubes;
+    }
+    public List<Nacionalidad> getNacionalidades() throws SQLException{
+        nacionalidades = new ArrayList<>();
+        Nacionalidad n;
+        query="select*from tbl_Pais";
+        rs=c.ejecutarSelect(query);
+        
+        int id=0;
+        String pais=null;
+        while(rs.next()){            
+            n=new Nacionalidad(id, pais);
+            nacionalidades.add(n);
+        }
+        
+        c.desconectar();
+        return nacionalidades;
     }
     
     public List<Partido> buscarPartidos(String filtro) throws SQLException{
@@ -452,6 +479,25 @@ public class Data {
         c.desconectar();
         return clubes;
     }
+    public List<Nacionalidad> getNacionalidades(String filtro) throws SQLException{
+        nacionalidades = new ArrayList<>();
+        Nacionalidad n;
+        query="select*from tbl_Pais where "
+                + "id like '%"+filtro+"%', "
+                + "pais '%"+filtro+"%'";
+        rs=c.ejecutarSelect(query);
+        
+        int id=0;
+        String pais=null;
+        while(rs.next()){            
+            n=new Nacionalidad(id, pais);
+            nacionalidades.add(n);
+        }
+        
+        c.desconectar();
+        return nacionalidades;        
+    }
+    
     
 }
 

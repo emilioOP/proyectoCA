@@ -92,7 +92,9 @@ public class TM_DT implements TableModel{
                 o=dt.getEdad();
                 break;
             case 4:
-                o=dt.getNacionalidad();
+                int idN=dt.getNacionalidad();
+                
+                
                 break;
             case 5:
                 o=dt.getClubDeportivo();
