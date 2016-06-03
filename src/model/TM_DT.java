@@ -5,7 +5,11 @@
  */
 package model;
 
+import bd.Data;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
@@ -15,9 +19,11 @@ import javax.swing.table.TableModel;
  */
 public class TM_DT implements TableModel{
     private List<DT> dts;
+    private Data d;
 
-    public TM_DT(List<DT> dts) {
+    public TM_DT(List<DT> dts) throws SQLException {
         this.dts = dts;
+        d=new Data();
     }
 
     @Override
@@ -92,9 +98,13 @@ public class TM_DT implements TableModel{
                 o=dt.getEdad();
                 break;
             case 4:
-                int idN=dt.getNacionalidad();
-                
-                
+                try {
+                    int idN = dt.getNacionalidad();
+                    Nacionalidad n = d.getNacionalidad(idN);
+                    o = n.getPais();
+                } catch (SQLException ex) {
+                    Logger.getLogger(TM_DT.class.getName()).log(Level.SEVERE, null, ex);
+                }                            
                 break;
             case 5:
                 o=dt.getClubDeportivo();

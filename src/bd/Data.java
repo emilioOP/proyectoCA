@@ -206,6 +206,7 @@ public class Data {
         rs=c.ejecutarSelect(query);
         
         if(rs.next()){
+            a=new Arbitro();
             a.setId(rs.getInt(1));
             a.setNombre(rs.getString(2));
             a.setApellido(rs.getString(3));
@@ -224,6 +225,7 @@ public class Data {
         rs=c.ejecutarSelect(query);
         
         if(rs.next()){
+            cd=new ClubDeportivo();
             cd.setId(rs.getInt(1));
             cd.setNombre(rs.getString(2));
         }
@@ -237,6 +239,7 @@ public class Data {
         rs=c.ejecutarSelect(query);
         
         if(rs.next()){
+            n=new Nacionalidad();
             n.setId(rs.getInt(1));
             n.setPais(rs.getString(2));
         }
@@ -496,9 +499,7 @@ public class Data {
         
         c.desconectar();
         return nacionalidades;        
-    }
-    
-    
+    }  
 }
 
 

@@ -18,6 +18,11 @@ public class Nacionalidad {
         this.pais = pais;
     }
 
+    public Nacionalidad() {
+    }
+    
+    
+
     public int getId() {
         return id;
     }
