@@ -3,11 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package bd;
+import bd.Conexion;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import model.Arbitro;
+import model.ClubDeportivo;
+import model.DT;
+import model.Partido;
 /**
  *
  * @author Emilio
@@ -22,7 +27,14 @@ public class Data {
     private List<Arbitro> arbitros;
     private List<ClubDeportivo> clubes;
     
-    public Data()throws SQLException{}
+    public Data()throws SQLException{
+        c = new Conexion(
+            "localhost:1433", //servidor
+            "proyectoCA", //base de datos 
+            "sa", //permiso
+            "123456" //clave
+        );
+    }
     
     public void crearPartido(Partido p) throws SQLException{
         query="insert into tbl_partidos values("

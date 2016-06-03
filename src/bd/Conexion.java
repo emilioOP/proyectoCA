@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package bd;
 
 import java.sql.*;
 
@@ -16,17 +16,18 @@ public class Conexion {
     private Statement sen; 
     private ResultSet rs;
 
-    public Conexion(String bd) throws SQLException{
-        String dbURL = "jdbc:sqlserver://localhost:1433"; //copiar url de la conexion ya creada
+    public Conexion(String server, String bd, String user, String pass) throws SQLException{
+        String url="jdbc:sqlserver://"+server;
         
-        con = DriverManager.getConnection(dbURL,"sa", "123456"); //dbURL, usuario, contraseña 
-        System.out.println(dbURL);
+        con = DriverManager.getConnection(url, user, pass);
         
         if (con != null) {
-            System.out.println("Conectado");
+            System.out.println("Conectado a "+bd+"");
+            String query="use "+bd+"";        
+            ejecutar(query);            
         }else{
             System.out.println("No se ha podido inicializar conexion ");
-        }         
+        }
     }
     
     public void ejecutar(String query) throws SQLException{
