@@ -43,36 +43,36 @@ public class TMPartido implements TableModel{
             case 2:
                 nombre="Seleccion 2";
                 break;
-            case 3:
-                nombre="Arbitro";
-                break;
-            case 4:
-                nombre="Arbitro Lateral 1";
-                break;
-            case 5:
-                nombre="Arbitro Lateral 2";
-                break;
-            case 6:
-                nombre="Cuarto Arbitro";
-                break;
-            case 7:
-                nombre="Estadio";
-                break;
-            case 8:
-                nombre="Publico Asistente";
-                break;
-            case 9:
-                nombre="Fecha";
-                break;
-            case 10:
-                nombre="Hora Inicio";
-                break;
-            case 11:
-                nombre="Hora Termino";
-                break;
-            case 12:
-                nombre="Fase";
-                break;
+//            case 3:
+//                nombre="Arbitro";
+//                break;
+//            case 4:
+//                nombre="Arbitro Lateral 1";
+//                break;
+//            case 5:
+//                nombre="Arbitro Lateral 2";
+//                break;
+//            case 6:
+//                nombre="Cuarto Arbitro";
+//                break;
+//            case 7:
+//                nombre="Estadio";
+//                break;
+//            case 8:
+//                nombre="Publico Asistente";
+//                break;
+//            case 9:
+//                nombre="Fecha";
+//                break;
+//            case 10:
+//                nombre="Hora Inicio";
+//                break;
+//            case 11:
+//                nombre="Hora Termino";
+//                break;
+//            case 12:
+//                nombre="Fase";
+//                break;
         }
         
         return nombre;
@@ -99,40 +99,41 @@ public class TMPartido implements TableModel{
                 break;
             case 1:
                 o=p.getIdSeleccion1();
+                //crear objeto seleccion
                 break;
             case 2:
                 o=p.getIdSeleccion2();
                 break;
-            case 3:
-                o=p.getArbitro();
-                break;
-            case 4:
-                o=p.getArbitroL1();
-                break;
-            case 5:
-                o=p.getArbitroL2();
-                break;
-            case 6:
-                o=p.getCuartoArbitro();
-                break;
-            case 7:
-                o=p.getIdEstadio();
-                break;
-            case 8:
-                o=p.getPublico();
-                break;
-            case 9:
-                o=p.getFecha();
-                break;
-            case 10:
-                o=p.getHoraInicio();
-                break;
-            case 11:
-                o=p.getHoraTermino();
-                break;
-            case 12:
-                o=p.getFase();
-                break;            
+////            case 3:
+////                o=p.getArbitro();
+////                break;
+////            case 4:
+////                o=p.getArbitroL1();
+////                break;
+////            case 5:
+////                o=p.getArbitroL2();
+////                break;
+////            case 6:
+////                o=p.getCuartoArbitro();
+////                break;
+////            case 7:
+////                o=p.getIdEstadio();
+////                break;
+////            case 8:
+////                o=p.getPublico();
+////                break;
+////            case 9:
+////                o=p.getFecha();
+////                break;
+////            case 10:
+////                o=p.getHoraInicio();
+////                break;
+////            case 11:
+////                o=p.getHoraTermino();
+////                break;
+////            case 12:
+////                o=p.getFase();
+////                break;            
         }
         return o;
     }
