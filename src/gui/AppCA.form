@@ -53,7 +53,6 @@
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                               <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="32767" attributes="0"/>
                               <Component id="jScrollPane1" min="-2" pref="220" max="-2" attributes="0"/>
@@ -61,7 +60,7 @@
                           <Group type="102" attributes="0">
                               <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="txtBusqueda" min="-2" pref="353" max="-2" attributes="0"/>
+                              <Component id="txtBusqueda" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
@@ -371,6 +370,10 @@
               </SubComponents>
             </Container>
             <Component class="javax.swing.JTextField" name="txtBusqueda">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtBusquedaActionPerformed"/>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtBusquedaKeyReleased"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel9">
               <Properties>

@@ -261,6 +261,17 @@ public class AppCA extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        txtBusqueda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBusquedaActionPerformed(evt);
+            }
+        });
+        txtBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBusquedaKeyReleased(evt);
+            }
+        });
+
         jLabel9.setText("Busqueda");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -271,14 +282,13 @@ public class AppCA extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, 0)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addGap(18, 18, 18)
-                        .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtBusqueda)))
                 .addGap(50, 50, 50))
         );
         jPanel2Layout.setVerticalGroup(
@@ -415,7 +425,7 @@ public class AppCA extends javax.swing.JFrame {
             d.crearDT(nuevoDT);
             JOptionPane.showMessageDialog(this, "DT Creado");
             btnCancelarDT.doClick();
-            cargarTablaDT();
+            cargarTablaDT(d.getDTs());
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "No se ha podido crear DT: "+ex.getMessage());
         } catch (NumberFormatException exx){
@@ -456,7 +466,7 @@ public class AppCA extends javax.swing.JFrame {
             
             DT dt=new DT(id, nombre, apellido, edad, idNacion, idClub, anosDT, sueldo);
             d.actualizarDT(dt);
-            cargarTablaDT();
+            cargarTablaDT(d.getDTs());
             btnCancelarDT.doClick();
             
             JOptionPane.showMessageDialog(this, "Se ha actualizado DT");
@@ -469,7 +479,7 @@ public class AppCA extends javax.swing.JFrame {
         try {
             int id=Integer.parseInt(txtDT_ID.getText());
             d.eliminarDT(id);
-            cargarTablaDT();
+            cargarTablaDT(d.getDTs());
             btnCancelarDT.doClick();
             
             JOptionPane.showMessageDialog(this,"Se ha eliminado DT");
@@ -477,6 +487,20 @@ public class AppCA extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error al eliminar DT: "+ex.getMessage());
         }
     }//GEN-LAST:event_btnEliminarDTActionPerformed
+
+    private void txtBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyReleased
+        try {
+            String filtro=txtBusqueda.getText();
+            List<DT> lista=d.buscarDTs(filtro);
+            cargarTablaDT(lista);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error para buscar: "+e.getMessage());
+        }
+    }//GEN-LAST:event_txtBusquedaKeyReleased
+
+    private void txtBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBusquedaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBusquedaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -543,7 +567,7 @@ public class AppCA extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void iniciar() throws SQLException {
-        cargarTablaDT();
+        cargarTablaDT(d.getDTs());
         actualizarCBONacionalidad();
         actualizarCBOClubDeportivo();
         btnCancelarDT.doClick();
@@ -555,8 +579,8 @@ public class AppCA extends javax.swing.JFrame {
 //        tbl_Partidos.setModel(modeloPartidos);
     }
 
-    private void cargarTablaDT() throws SQLException{
-        TM_DT model=new TM_DT(d.getDTs());
+    private void cargarTablaDT(List<DT> dts) throws SQLException{
+        TM_DT model=new TM_DT(dts);
         tabDT.setModel(model);
         tabDT.getColumnModel().getColumn(0).setPreferredWidth(5);
         tabDT.getColumnModel().getColumn(1).setPreferredWidth(10);
@@ -589,7 +613,4 @@ public class AppCA extends javax.swing.JFrame {
         }        
     }
 
-    private void CrudActualizar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

@@ -405,16 +405,16 @@ public class Data {
         DT dt;
         
         query="select*from tbl_DirectorTecnico where "
-                + "id like '%"+filtro+"%', "
-                + "nombre like '%"+filtro+"%', "
-                + "apellido like '%"+filtro+"%', "
-                + "edad like '%"+filtro+"%', "
-                + "nacionalidad like '%"+filtro+"%', "
-                + "clubDeportivo like '%"+filtro+"%', "
-                + "aniosComoDT like '%"+filtro+"%', "
+                + "id like '%"+filtro+"%' or "
+                + "nombre like '%"+filtro+"%' or "
+                + "apellido like '%"+filtro+"%' or "
+                + "edad like '%"+filtro+"%' or "
+                + "nacionalidad like '%"+filtro+"%' or "
+                + "clubDeportivo like '%"+filtro+"%' or "
+                + "aniosComoDT like '%"+filtro+"%' or "
                 + "sueldoFIFA like '%"+filtro+"%'"
                 + ";";
-//        System.out.println(query);
+        System.out.println(query);
         rs=c.ejecutarSelect(query);
         
         while(rs.next()){
