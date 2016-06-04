@@ -33,7 +33,7 @@ public class TM_DT implements TableModel{
 
     @Override
     public int getColumnCount() {
-        return 8;
+        return 3;
     }
 
     @Override
@@ -49,21 +49,21 @@ public class TM_DT implements TableModel{
             case 2:
                 nombre="Apellido";
                 break;
-            case 3:
-                nombre="Edad";
-                break;
-            case 4:
-                nombre="Nacionalidad";
-                break;
-            case 5:
-                nombre="Club Deportivo";
-                break;
-            case 6:
-                nombre="Años como DT";
-                break;
-            case 7:
-                nombre="Sueldo Fifa";
-                break;
+//            case 3:
+//                nombre="Edad";
+//                break;
+//            case 4:
+//                nombre="Nacionalidad";
+//                break;
+//            case 5:
+//                nombre="Club Deportivo";
+//                break;
+//            case 6:
+//                nombre="Años como DT";
+//                break;
+//            case 7:
+//                nombre="Sueldo Fifa";
+//                break;
         }
         
         return nombre;
@@ -94,33 +94,33 @@ public class TM_DT implements TableModel{
             case 2:
                 o=dt.getApellido();
                 break;
-            case 3:
-                o=dt.getEdad();
-                break;
-            case 4:
-                try {
-                    int idN = dt.getNacionalidad();
-                    Nacionalidad n = d.getNacionalidad(idN);
-                    o = n.getPais();
-                } catch (SQLException ex) {
-                    Logger.getLogger(TM_DT.class.getName()).log(Level.SEVERE, null, ex);
-                }                            
-                break;
-            case 5:
-                try {
-                    int idC = dt.getClubDeportivo();
-                    ClubDeportivo c = d.getClubDeportivo(idC);
-                    o=c.getNombre();
-                } catch (SQLException ex) {
-                    Logger.getLogger(TM_DT.class.getName()).log(Level.SEVERE, null, ex);
-                }                
-                break;
-            case 6:
-                o=dt.getAniosDT();
-                break;
-            case 7:
-                o=dt.getSueldoFifa();
-                break;      
+//            case 3:
+//                o=dt.getEdad();
+//                break;
+//            case 4:
+//                try {
+//                    int idN = dt.getNacionalidad();
+//                    Nacionalidad n = d.getNacionalidad(idN);
+//                    o = n.getPais();
+//                } catch (SQLException ex) {
+//                    Logger.getLogger(TM_DT.class.getName()).log(Level.SEVERE, null, ex);
+//                }                            
+//                break;
+//            case 5:
+//                try {
+//                    int idC = dt.getClubDeportivo();
+//                    ClubDeportivo c = d.getClubDeportivo(idC);
+//                    o=c.getNombre();
+//                } catch (SQLException ex) {
+//                    Logger.getLogger(TM_DT.class.getName()).log(Level.SEVERE, null, ex);
+//                }                
+//                break;
+//            case 6:
+//                o=dt.getAniosDT();
+//                break;
+//            case 7:
+//                o=dt.getSueldoFifa();
+//                break;      
         }
         return o;
     }

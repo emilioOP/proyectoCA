@@ -31,6 +31,7 @@ public class AppCA extends javax.swing.JFrame {
         try {
             d=new Data();
             iniciar();
+            setLocationRelativeTo(null);
         } catch (SQLException ex) {
             System.out.println("Error de conexion"+ex.getMessage());
         }
@@ -46,7 +47,6 @@ public class AppCA extends javax.swing.JFrame {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabDT = new javax.swing.JTable();
@@ -71,21 +71,11 @@ public class AppCA extends javax.swing.JFrame {
         btnActualizarDT = new javax.swing.JButton();
         btnCancelarDT = new javax.swing.JButton();
         btnEliminarDT = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1021, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 346, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Partidos", jPanel1);
 
         tabDT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -280,9 +270,9 @@ public class AppCA extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 803, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(45, 45, 45)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(77, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -296,15 +286,48 @@ public class AppCA extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Director Tecnico", jPanel2);
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(194, 194, 194)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(158, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 96, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Partidos", jPanel1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1026, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jTabbedPane1)
         );
 
         pack();
@@ -496,7 +519,9 @@ public class AppCA extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JSpinner spDT_Anos;
     private javax.swing.JSpinner spDT_Edad;
     private javax.swing.JTable tabDT;
@@ -523,8 +548,8 @@ public class AppCA extends javax.swing.JFrame {
         TM_DT model=new TM_DT(d.getDTs());
         tabDT.setModel(model);
         tabDT.getColumnModel().getColumn(0).setPreferredWidth(5);
-        tabDT.getColumnModel().getColumn(3).setPreferredWidth(5);
-        tabDT.getColumnModel().getColumn(6).setPreferredWidth(15);
+        tabDT.getColumnModel().getColumn(1).setPreferredWidth(10);
+        tabDT.getColumnModel().getColumn(2).setPreferredWidth(10);
     }
 
     private void actualizarCBONacionalidad() {
