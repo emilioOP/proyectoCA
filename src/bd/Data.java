@@ -346,10 +346,10 @@ public class Data {
         query="select*from tbl_Pais";
         rs=c.ejecutarSelect(query);
         
-        int id=0;
-        String pais=null;
         while(rs.next()){            
-            n=new Nacionalidad(id, pais);
+            n=new Nacionalidad();
+            n.setId(rs.getInt(1));
+            n.setPais(rs.getString(2));
             nacionalidades.add(n);
         }
         
