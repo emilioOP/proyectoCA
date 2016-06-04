@@ -7,14 +7,14 @@ package gui;
 
 import bd.Conexion;
 import bd.Data;
+import static com.sun.corba.se.impl.util.Utility.printStackTrace;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
-import model.Nacionalidad;
-import model.TMPartido;
-import model.TM_DT;
+import model.*;
 
 /**
  *
@@ -62,11 +62,15 @@ public class AppCA extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        cdDT_Club = new javax.swing.JComboBox<>();
+        cbDT_Club = new javax.swing.JComboBox<>();
         spDT_Anos = new javax.swing.JSpinner();
         txtDT_Sueldo = new javax.swing.JTextField();
         txtDT_Nombre = new javax.swing.JTextField();
         cbDT_Nacionalidad = new javax.swing.JComboBox<>();
+        btnCrearDT = new javax.swing.JButton();
+        btnActualizarDT = new javax.swing.JButton();
+        btnCancelarDT = new javax.swing.JButton();
+        btnEliminarDT = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,11 +78,11 @@ public class AppCA extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 851, Short.MAX_VALUE)
+            .addGap(0, 1021, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 288, Short.MAX_VALUE)
+            .addGap(0, 346, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Partidos", jPanel1);
@@ -94,6 +98,16 @@ public class AppCA extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tabDT.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tabDTMouseReleased(evt);
+            }
+        });
+        tabDT.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tabDTKeyReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabDT);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos"));
@@ -122,9 +136,7 @@ public class AppCA extends javax.swing.JFrame {
 
         jLabel8.setText("Sueldo Fifa");
 
-        cdDT_Club.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        txtDT_Sueldo.setText("jTextField5");
+        cbDT_Club.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         txtDT_Nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,6 +145,34 @@ public class AppCA extends javax.swing.JFrame {
         });
 
         cbDT_Nacionalidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        btnCrearDT.setText("Crear");
+        btnCrearDT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearDTActionPerformed(evt);
+            }
+        });
+
+        btnActualizarDT.setText("Actualizar");
+        btnActualizarDT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarDTActionPerformed(evt);
+            }
+        });
+
+        btnCancelarDT.setText("Cancelar");
+        btnCancelarDT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarDTActionPerformed(evt);
+            }
+        });
+
+        btnEliminarDT.setText("Eliminar");
+        btnEliminarDT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarDTActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -148,14 +188,14 @@ public class AppCA extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(spDT_Anos)
-                            .addComponent(cdDT_Club, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(cbDT_Club, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(10, 10, 10))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addGap(28, 28, 28)
-                                .addComponent(txtDT_Sueldo, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE))
+                                .addComponent(txtDT_Sueldo))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
@@ -176,7 +216,16 @@ public class AppCA extends javax.swing.JFrame {
                             .addComponent(txtDT_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(txtDT_Nombre)
-                                .addContainerGap())))))
+                                .addContainerGap())))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnCancelarDT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnCrearDT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(6, 6, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnActualizarDT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEliminarDT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,7 +253,7 @@ public class AppCA extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(cdDT_Club, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbDT_Club, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -213,6 +262,14 @@ public class AppCA extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(txtDT_Sueldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCrearDT)
+                    .addComponent(btnActualizarDT))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancelarDT)
+                    .addComponent(btnEliminarDT))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -224,15 +281,15 @@ public class AppCA extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 615, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 803, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -243,11 +300,11 @@ public class AppCA extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1026, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -260,6 +317,134 @@ public class AppCA extends javax.swing.JFrame {
     private void txtDT_NombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDT_NombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDT_NombreActionPerformed
+
+    private void tabDTKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tabDTKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tabDTKeyReleased
+
+    private void tabDTMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabDTMouseReleased
+        if(evt.getClickCount()==1){
+            try {
+                int fila=tabDT.getSelectedRow();
+                int id=(int)tabDT.getValueAt(fila, 0);
+                DT dt=d.getDT(id);
+                
+                txtDT_ID.setText(Integer.toString(dt.getId()));
+                txtDT_Nombre.setText(dt.getNombre());
+                txtDT_Apellido.setText(dt.getApellido());
+                txtDT_Sueldo.setText(Integer.toString(dt.getSueldoFifa()));
+                
+                ClubDeportivo c=d.getClubDeportivo(dt.getClubDeportivo());
+                int indiceCbo=cbDT_Club.getItemCount();                
+                for(int i=0; i<indiceCbo; i++){
+                    String nombreObj=cbDT_Club.getItemAt(i).toString();
+                    if(nombreObj.equalsIgnoreCase(c.getNombre())){
+                        cbDT_Club.setSelectedIndex(i);
+                    }
+                }
+                
+                Nacionalidad n=d.getNacionalidad(dt.getNacionalidad());
+                int indiceCbo2=cbDT_Nacionalidad.getItemCount();
+                for(int i=0; i<indiceCbo2; i++){
+                    String nombreObj2=cbDT_Nacionalidad.getItemAt(i).toString();
+                    if(nombreObj2.equalsIgnoreCase(n.getPais())){
+                        cbDT_Nacionalidad.setSelectedIndex(i);
+                    }
+                }
+                
+                spDT_Anos.setValue(dt.getAniosDT());
+                spDT_Edad.setValue(dt.getEdad());
+                
+                btnCrearDT.setEnabled(false);
+                btnEliminarDT.setEnabled(true);
+                btnCancelarDT.setEnabled(true);
+                btnActualizarDT.setEnabled(true);
+            } catch (SQLException e) {
+                
+            }
+        }        
+    }//GEN-LAST:event_tabDTMouseReleased
+
+    private void btnCrearDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearDTActionPerformed
+        DT nuevoDT=new DT();
+        nuevoDT.setNombre(txtDT_Nombre.getText());
+        nuevoDT.setApellido(txtDT_Apellido.getText());
+        nuevoDT.setEdad(Integer.parseInt(spDT_Edad.getValue().toString()));
+        nuevoDT.setAniosDT(Integer.parseInt(spDT_Anos.getValue().toString()));
+        nuevoDT.setSueldoFifa(Integer.parseInt(txtDT_Sueldo.getText()));
+        
+        ClubDeportivo club=(ClubDeportivo)cbDT_Club.getSelectedItem();
+        nuevoDT.setClubDeportivo(club.getId());
+        
+        Nacionalidad pais=(Nacionalidad)cbDT_Nacionalidad.getSelectedItem();
+        nuevoDT.setNacionalidad(pais.getId());
+        
+        try {
+            d.crearDT(nuevoDT);
+            JOptionPane.showMessageDialog(this, "DT Creado");
+            btnCancelarDT.doClick();
+            cargarTablaDT();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "No se ha podido crear DT: "+ex.getMessage());
+        } catch (NumberFormatException exx){
+            JOptionPane.showMessageDialog(this, "Existen datos invalidos");
+        }
+        
+    }//GEN-LAST:event_btnCrearDTActionPerformed
+
+    private void btnCancelarDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarDTActionPerformed
+        txtDT_Nombre.setText(null);
+        txtDT_Apellido.setText(null);
+        txtDT_ID.setText(null);
+        txtDT_Sueldo.setText(null);
+        spDT_Anos.setValue(0);
+        spDT_Edad.setValue(0);
+        cbDT_Club.setSelectedIndex(0);
+        cbDT_Nacionalidad.setSelectedIndex(0);
+        tabDT.clearSelection();        
+        btnActualizarDT.setEnabled(false);
+        btnCancelarDT.setEnabled(false);
+        btnCrearDT.setEnabled(true);
+        btnEliminarDT.setEnabled(false);        
+    }//GEN-LAST:event_btnCancelarDTActionPerformed
+
+    private void btnActualizarDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarDTActionPerformed
+        try {
+            int id=Integer.parseInt(txtDT_ID.getText());
+            String nombre=txtDT_Nombre.getText();
+            String apellido=txtDT_Apellido.getText();
+            int sueldo=Integer.parseInt(txtDT_Sueldo.getText());
+            int edad=Integer.parseInt(spDT_Edad.getValue().toString());
+            int anosDT=Integer.parseInt(spDT_Anos.getValue().toString());
+            
+            ClubDeportivo club=(ClubDeportivo)cbDT_Club.getSelectedItem();
+            int idClub=club.getId();
+            Nacionalidad pais=(Nacionalidad)cbDT_Nacionalidad.getSelectedItem();
+            int idNacion=pais.getId();
+            
+            DT dt=new DT(id, nombre, apellido, edad, idNacion, idClub, anosDT, sueldo);
+            d.actualizarDT(dt);
+            cargarTablaDT();
+            btnCancelarDT.doClick();
+            
+            JOptionPane.showMessageDialog(this, "Se ha actualizado DT");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Error para actualizar DT: "+ex.getMessage());
+        }
+    }//GEN-LAST:event_btnActualizarDTActionPerformed
+
+    private void btnEliminarDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarDTActionPerformed
+        try {
+            int id=Integer.parseInt(txtDT_ID.getText());
+            d.eliminarDT(id);
+            cargarTablaDT();
+            btnCancelarDT.doClick();
+            
+            JOptionPane.showMessageDialog(this,"Se ha eliminado DT");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Error al eliminar DT: "+ex.getMessage());
+        }
+    }//GEN-LAST:event_btnEliminarDTActionPerformed
 
     /**
      * @param args the command line arguments
@@ -293,8 +478,12 @@ public class AppCA extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizarDT;
+    private javax.swing.JButton btnCancelarDT;
+    private javax.swing.JButton btnCrearDT;
+    private javax.swing.JButton btnEliminarDT;
+    private javax.swing.JComboBox<Object> cbDT_Club;
     private javax.swing.JComboBox<Object> cbDT_Nacionalidad;
-    private javax.swing.JComboBox<String> cdDT_Club;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -320,11 +509,13 @@ public class AppCA extends javax.swing.JFrame {
     private void iniciar() throws SQLException {
         cargarTablaDT();
         actualizarCBONacionalidad();
+        actualizarCBOClubDeportivo();
+        btnCancelarDT.doClick();
 //        cargarTablaPartidos();
     }
 
     private void cargarTablaPartidos() throws SQLException{
-        TMPartido modeloPartidos=new TMPartido(d.getPartidos());
+//        TMPartido modeloPartidos=new TMPartido(d.getPartidos());
 //        tbl_Partidos.setModel(modeloPartidos);
     }
 
@@ -347,5 +538,22 @@ public class AppCA extends javax.swing.JFrame {
         } catch (Exception e) {
             System.out.println("Error cargar cbGenero: "+e.getMessage());
         }
+    }
+
+    private void actualizarCBOClubDeportivo() {
+        try {
+            List<ClubDeportivo> clubes=d.getClubDeportivos();
+            cbDT_Club.removeAllItems();
+            
+            for(ClubDeportivo club: clubes){
+                cbDT_Club.addItem(club);
+            }
+        } catch (Exception e) {
+            System.out.println("Error cargar cbDT_Club: "+e.getMessage());
+        }        
+    }
+
+    private void CrudActualizar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

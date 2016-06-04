@@ -54,8 +54,8 @@ public class Data {
     }    
     public void crearDT(DT dt) throws SQLException{
         query="insert into tbl_DirectorTecnico values("
-                + ""+dt.getNombre()+","
-                + ""+dt.getApellido()+","
+                + "'"+dt.getNombre()+"',"
+                + "'"+dt.getApellido()+"',"
                 + ""+dt.getEdad()+","
                 + ""+dt.getNacionalidad()+","
                 + ""+dt.getClubDeportivo()+","
@@ -67,8 +67,8 @@ public class Data {
     }    
     public void crearArbitro(Arbitro a) throws SQLException{
         query="insert into tbl_arbitro values("
-                + ""+a.getNombre()+","
-                + ""+a.getApellido()+","
+                + "'"+a.getNombre()+"',"
+                + "'"+a.getApellido()+"',"
                 + ""+a.getEdad()+","
                 + ""+a.getPosision()+","
                 + ""+a.getPais()+""
@@ -77,7 +77,7 @@ public class Data {
         c.ejecutar(query);
     }    
     public void crearClubDeportivo(String nombreClub) throws SQLException{
-        query="insert into tbl_ClubDeportivo values("+nombreClub+");";
+        query="insert into tbl_ClubDeportivo values('"+nombreClub+"');";
 //        System.out.println(query);
         c.ejecutar(query);
     }
@@ -128,10 +128,10 @@ public class Data {
                 + "edad="+dt.getEdad()+" , "
                 + "nacionalidad="+dt.getNacionalidad()+", "
                 + "clubDeportivo="+dt.getClubDeportivo()+", "
-                + "anioComoDT="+dt.getAniosDT()+", "
+                + "aniosComoDT="+dt.getAniosDT()+", "
                 + "sueldoFIFA="+dt.getSueldoFifa()+" "
                 + "where id="+dt.getId()+";";
-//        System.out.println(query);
+        System.out.println(query);
         c.ejecutar(query);
     }
     public void actualizarArbitro(Arbitro a) throws SQLException{
@@ -186,6 +186,7 @@ public class Data {
         rs=c.ejecutarSelect(query);
         
         if(rs.next()){
+            dt=new DT();
             dt.setId(rs.getInt(1));
             dt.setNombre(rs.getString(2));
             dt.setApellido(rs.getString(3));

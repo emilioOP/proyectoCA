@@ -22,6 +22,17 @@ public class DT {
     public DT() {
     }
 
+    public DT(int id, String nombre, String apellido, int edad, int nacionalidad, int clubDeportivo, int aniosDT, int sueldoFifa) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.edad = edad;
+        this.nacionalidad = nacionalidad;
+        this.clubDeportivo = clubDeportivo;
+        this.aniosDT = aniosDT;
+        this.sueldoFifa = sueldoFifa;
+    }
+
     public int getId() {
         return id;
     }
