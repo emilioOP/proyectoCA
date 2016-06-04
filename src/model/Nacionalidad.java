@@ -20,8 +20,6 @@ public class Nacionalidad {
 
     public Nacionalidad() {
     }
-    
-    
 
     public int getId() {
         return id;

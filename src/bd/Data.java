@@ -49,7 +49,7 @@ public class Data {
                 + ""+p.getHoraTermino()+","
                 + ""+p.getFase()+""
                 + ");";
-        System.out.println(query);
+//        System.out.println(query);
         c.ejecutar(query);
     }    
     public void crearDT(DT dt) throws SQLException{
@@ -62,7 +62,7 @@ public class Data {
                 + ""+dt.getAniosDT()+","
                 + ""+dt.getSueldoFifa()+""
                 + ");";
-        System.out.println(query);
+//        System.out.println(query);
         c.ejecutar(query);
     }    
     public void crearArbitro(Arbitro a) throws SQLException{
@@ -73,33 +73,33 @@ public class Data {
                 + ""+a.getPosision()+","
                 + ""+a.getPais()+""
                 + ");";
-        System.out.println(query);
+//        System.out.println(query);
         c.ejecutar(query);
     }    
     public void crearClubDeportivo(String nombreClub) throws SQLException{
         query="insert into tbl_ClubDeportivo values("+nombreClub+");";
-        System.out.println(query);
+//        System.out.println(query);
         c.ejecutar(query);
     }
     
     public void eliminarPartido(int id) throws SQLException{
         query="delete from tbl_partidos where id="+id+"";
-        System.out.println(query);
+//        System.out.println(query);
         c.ejecutar(query);     
     }
     public void eliminarDT(int id) throws SQLException{
         query="delete from tbl_DirectorTecnico where id="+id+"";
-        System.out.println(query);
+//        System.out.println(query);
         c.ejecutar(query);           
     }
     public void eliminarArbitro(int id) throws SQLException{
         query="delete from tbl_arbitro where id="+id+"";
-        System.out.println(query);
+//        System.out.println(query);
         c.ejecutar(query);         
     }
     public void eliminarClubDeportivo(int id) throws SQLException{
         query="delete from tbl_ClubDeportivo where id="+id+"";
-        System.out.println(query);
+//        System.out.println(query);
         c.ejecutar(query);        
     }
     
@@ -118,7 +118,7 @@ public class Data {
                 + "horaTermino='"+p.getHoraTermino()+"', "
                 + "fase="+p.getFase()+" "
                 + "where id="+p.getId()+";";
-        System.out.println(query);
+//        System.out.println(query);
         c.ejecutar(query);
     }
     public void actualizarDT(DT dt) throws SQLException{
@@ -131,7 +131,7 @@ public class Data {
                 + "anioComoDT="+dt.getAniosDT()+", "
                 + "sueldoFIFA="+dt.getSueldoFifa()+" "
                 + "where id="+dt.getId()+";";
-        System.out.println(query);
+//        System.out.println(query);
         c.ejecutar(query);
     }
     public void actualizarArbitro(Arbitro a) throws SQLException{
@@ -142,21 +142,21 @@ public class Data {
                 + "posicion='"+a.getPosision()+"', "
                 + "pais="+a.getPais()+" "
                 + "where id="+a.getId()+";";
-        System.out.println(query);
+//        System.out.println(query);
         c.ejecutar(query);
     }
     public void actualizarClubDeportivo(ClubDeportivo cd) throws SQLException{
         query="update tbl_ClubDeportivo set "
                 + "nombre='"+cd.getNombre()+"' "
                 + "where id= "+cd.getId()+";";
-        System.out.println(query);
+//        System.out.println(query);
         c.ejecutar(query);
     }
     
     public Partido getPartido(int id) throws SQLException{
         Partido p=null;
         query="select*from tbl_partidos where id="+id+"";
-        System.out.println(query);
+//        System.out.println(query);
         rs=c.ejecutarSelect(query);
         
         if(rs.next()){
@@ -182,7 +182,7 @@ public class Data {
     public DT getDT(int id) throws SQLException{
         DT dt=null;
         query="select*from tbl_DirectorTecnico where id="+id+"";
-        System.out.println(query);
+//        System.out.println(query);
         rs=c.ejecutarSelect(query);
         
         if(rs.next()){
@@ -202,7 +202,7 @@ public class Data {
     public Arbitro getArbitro(int id) throws SQLException{
         Arbitro a=null;
         query="select*from tbl_arbitro where id="+id+"";
-        System.out.println(query);
+//        System.out.println(query);
         rs=c.ejecutarSelect(query);
         
         if(rs.next()){
@@ -221,7 +221,7 @@ public class Data {
     public ClubDeportivo getClubDeportivo(int id) throws SQLException{
         ClubDeportivo cd=null;
         query="select*from tbl_ClubDeportivo where id="+id+"";
-        System.out.println(query);
+//        System.out.println(query);
         rs=c.ejecutarSelect(query);
         
         if(rs.next()){
@@ -252,7 +252,7 @@ public class Data {
         partidos=new ArrayList<>();
         Partido p;
         query="select*from tbl_partidos;";
-        System.out.println(query);
+//        System.out.println(query);
         rs=c.ejecutarSelect(query);
         
         while(rs.next()){
@@ -281,7 +281,7 @@ public class Data {
         DT dt;
         
         query="select*from tbl_DirectorTecnico;";
-        System.out.println(query);
+//        System.out.println(query);
         rs=c.ejecutarSelect(query);
         
         while(rs.next()){
@@ -305,7 +305,7 @@ public class Data {
         Arbitro a;
         
         query="select*from tbl_arbitro;";
-        System.out.println(query);
+//        System.out.println(query);
         rs=c.ejecutarSelect(query);
         
         while(rs.next()){
@@ -327,7 +327,7 @@ public class Data {
         ClubDeportivo cd;
         
         query="select*from tbl_ClubDeportivo;";
-        System.out.println(query);
+//        System.out.println(query);
         rs=c.ejecutarSelect(query);
         
         while(rs.next()){
@@ -375,7 +375,7 @@ public class Data {
                 + "horaTermino like '%"+filtro+"%', "
                 + "fase like '%"+filtro+"%'"
                 + ";";
-        System.out.println(query);
+//        System.out.println(query);
         rs=c.ejecutarSelect(query);
         
         while(rs.next()){
@@ -413,7 +413,7 @@ public class Data {
                 + "aniosComoDT like '%"+filtro+"%', "
                 + "sueldoFIFA like '%"+filtro+"%'"
                 + ";";
-        System.out.println(query);
+//        System.out.println(query);
         rs=c.ejecutarSelect(query);
         
         while(rs.next()){
@@ -444,7 +444,7 @@ public class Data {
                 + "posicion like '%"+filtro+"%', "
                 + "pais like '%"+filtro+"%'"
                 + ";";
-        System.out.println(query);
+//        System.out.println(query);
         rs=c.ejecutarSelect(query);
         
         while(rs.next()){
@@ -469,7 +469,7 @@ public class Data {
                 + "id like '%"+filtro+"%', "
                 + "nombre like '%"+filtro+"%'"
                 + ";";
-        System.out.println(query);
+//        System.out.println(query);
         rs=c.ejecutarSelect(query);
         
         while(rs.next()){

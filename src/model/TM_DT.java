@@ -107,7 +107,13 @@ public class TM_DT implements TableModel{
                 }                            
                 break;
             case 5:
-                o=dt.getClubDeportivo();
+                try {
+                    int idC = dt.getClubDeportivo();
+                    ClubDeportivo c = d.getClubDeportivo(idC);
+                    o=c.getNombre();
+                } catch (SQLException ex) {
+                    Logger.getLogger(TM_DT.class.getName()).log(Level.SEVERE, null, ex);
+                }                
                 break;
             case 6:
                 o=dt.getAniosDT();
