@@ -122,37 +122,7 @@ public class TMPartido implements TableModel{
                 } catch (SQLException e) {
                     System.out.println(e.getMessage());
                 }                    
-                break;
-////            case 3:
-////                o=p.getArbitro();
-////                break;
-////            case 4:
-////                o=p.getArbitroL1();
-////                break;
-////            case 5:
-////                o=p.getArbitroL2();
-////                break;
-////            case 6:
-////                o=p.getCuartoArbitro();
-////                break;
-////            case 7:
-////                o=p.getIdEstadio();
-////                break;
-////            case 8:
-////                o=p.getPublico();
-////                break;
-////            case 9:
-////                o=p.getFecha();
-////                break;
-////            case 10:
-////                o=p.getHoraInicio();
-////                break;
-////            case 11:
-////                o=p.getHoraTermino();
-////                break;
-////            case 12:
-////                o=p.getFase();
-////                break;            
+                break;       
         }
         return o;
     }

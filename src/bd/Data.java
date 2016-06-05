@@ -26,6 +26,7 @@ public class Data {
     private List<Nacionalidad> nacionalidades;
     private List<Seleccion> selecciones;
     private List<Estadio> estadios;
+    private List<Fase> fases;
     
     public Data()throws SQLException{
         c = new Conexion(
@@ -51,7 +52,7 @@ public class Data {
                 + "'"+p.getHoraTermino()+":"+p.getMinTermino()+":0', "
                 + ""+p.getFase()+""
                 + ");";
-//        System.out.println(query);
+        System.out.println(query);
         c.ejecutar(query);
     }    
     public void crearDT(DT dt) throws SQLException{
@@ -320,6 +321,20 @@ public class Data {
         c.desconectar();
         return e;        
     }
+    public Fase getFase(int id) throws SQLException{
+        Fase f=null;
+        query="select*from tbl_Fase where id="+id+"";
+        rs=c.ejecutarSelect(query);
+        
+        if(rs.next()){
+            f=new Fase();
+            f.setId(rs.getInt(1));
+            f.setFase(rs.getString(2));
+        }
+        
+        c.desconectar();
+        return f;         
+    }
     
     public List<Partido> getPartidos() throws SQLException{
         partidos=new ArrayList<>();
@@ -500,6 +515,22 @@ public class Data {
         c.desconectar();
         return estadios;        
     }
+    public List<Fase> getFases() throws SQLException{
+        fases = new ArrayList<>();
+        Fase f;
+        query="select*from tbl_Fase";
+        rs=c.ejecutarSelect(query);
+        
+        while(rs.next()){            
+            f=new Fase();  
+            f.setId(rs.getInt(1));
+            f.setFase(rs.getString(2));
+            fases.add(f);
+        }
+        
+        c.desconectar();
+        return fases;             
+    }
     
     public List<Partido> buscarPartidos(String filtro) throws SQLException{
         partidos=new ArrayList<>();
@@ -512,14 +543,14 @@ public class Data {
                 + "arbitroL1 like '%"+filtro+"%' or "
                 + "arbitroL2 like '%"+filtro+"%' or "
                 + "cuartoArbitro like '%"+filtro+"%' or "
-                + "estado like '%"+filtro+"%' or "
+                + "estadio like '%"+filtro+"%' or "
                 + "publicoAsistente like '%"+filtro+"%' or "
                 + "fecha like '%"+filtro+"%' or "
                 + "horaInicio like '%"+filtro+"%' or "
                 + "horaTermino like '%"+filtro+"%' or "
                 + "fase like '%"+filtro+"%'"
                 + ";";
-//        System.out.println(query);
+        System.out.println(query);
         rs=c.ejecutarSelect(query);
         
         while(rs.next()){
@@ -560,7 +591,7 @@ public class Data {
                 + "aniosComoDT like '%"+filtro+"%' or "
                 + "sueldoFIFA like '%"+filtro+"%'"
                 + ";";
-        System.out.println(query);
+//        System.out.println(query);
         rs=c.ejecutarSelect(query);
         
         while(rs.next()){

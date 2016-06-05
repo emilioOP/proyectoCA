@@ -10,6 +10,7 @@ import bd.Data;
 import static com.sun.corba.se.impl.util.Utility.printStackTrace;
 import com.sun.javafx.image.impl.IntArgb;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -83,6 +84,8 @@ public class AppCA extends javax.swing.JFrame {
         spPartido_InicioMinuto = new javax.swing.JSpinner();
         spPartido_Dia = new javax.swing.JSpinner();
         spPartido_Mes = new javax.swing.JSpinner();
+        jLabel23 = new javax.swing.JLabel();
+        cboPartido_Fase = new javax.swing.JComboBox<>();
         jLabel22 = new javax.swing.JLabel();
         txtPartidoBusqueda = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
@@ -214,6 +217,10 @@ public class AppCA extends javax.swing.JFrame {
 
         spPartido_Mes.setModel(new javax.swing.SpinnerListModel(new String[] {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"}));
 
+        jLabel23.setText("Fase");
+
+        cboPartido_Fase.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -221,55 +228,57 @@ public class AppCA extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnPartido_Crear, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel14)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel16)
+                    .addComponent(jLabel17)
+                    .addComponent(jLabel19)
+                    .addComponent(jLabel18)
+                    .addComponent(jLabel20)
+                    .addComponent(jLabel21)
+                    .addComponent(btnPartidoCancelar)
+                    .addComponent(jLabel23))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cboPartido_Estadio, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cboPartido_Fase, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cboPartido_SeleccionA, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cboPartido_SeleccionB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(spPartido_Publico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnPartido_Crear, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel14)
-                            .addComponent(jLabel15)
-                            .addComponent(jLabel16)
-                            .addComponent(jLabel17)
-                            .addComponent(jLabel19)
-                            .addComponent(jLabel18)
-                            .addComponent(jLabel20)
-                            .addComponent(jLabel21))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cboPartido_Estadio, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtPartido_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel4Layout.createSequentialGroup()
+                                    .addComponent(spPartido_InicioHora, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(spPartido_InicioMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel4Layout.createSequentialGroup()
+                                    .addComponent(spPartido_Dia, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(spPartido_Mes, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cboPartido_ArbitroD, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cboPartido_ArbitroLB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cboPartido_ArbitroLA, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cboPartido_ArbitroA, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel4Layout.createSequentialGroup()
+                                    .addComponent(spPartido_TerminoHora, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(spPartido_TerminoMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtPartido_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addComponent(spPartido_InicioHora, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(spPartido_InicioMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addComponent(spPartido_Dia, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(spPartido_Mes, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(cboPartido_ArbitroD, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cboPartido_ArbitroLB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cboPartido_ArbitroLA, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cboPartido_ArbitroA, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addComponent(spPartido_TerminoHora, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(spPartido_TerminoMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGap(28, 28, 28)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cboPartido_SeleccionA, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cboPartido_SeleccionB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(spPartido_Publico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnPartidoActualizar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(btnPartidoCancelar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnPartidoEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(btnPartidoEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnPartidoActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -328,18 +337,30 @@ public class AppCA extends javax.swing.JFrame {
                     .addComponent(spPartido_TerminoHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(spPartido_TerminoMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel21))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel23)
+                    .addComponent(cboPartido_Fase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnPartido_Crear)
-                    .addComponent(btnPartidoActualizar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnPartidoCancelar)
-                    .addComponent(btnPartidoEliminar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(btnPartido_Crear)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPartidoCancelar))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(btnPartidoActualizar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPartidoEliminar)))
+                .addGap(26, 26, 26))
         );
 
         jLabel22.setText("Busqueda");
+
+        txtPartidoBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPartidoBusquedaKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -348,10 +369,10 @@ public class AppCA extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel22)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -366,10 +387,10 @@ public class AppCA extends javax.swing.JFrame {
                     .addComponent(jLabel22)
                     .addComponent(txtPartidoBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Partidos", jPanel1);
@@ -597,7 +618,7 @@ public class AppCA extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Director Tecnico", jPanel2);
@@ -612,7 +633,9 @@ public class AppCA extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jTabbedPane1)
+                .addContainerGap())
         );
 
         pack();
@@ -771,19 +794,155 @@ public class AppCA extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBusquedaActionPerformed
 
     private void btnPartido_CrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPartido_CrearActionPerformed
-        // TODO add your handling code here:
+        Partido p;
+        Object seleccionA=cboPartido_SeleccionA.getSelectedItem();
+        Object seleccionB=cboPartido_SeleccionB.getSelectedItem();
+        Object arbitroA=cboPartido_ArbitroA.getSelectedItem();
+        Object arbitroLA=cboPartido_ArbitroLA.getSelectedItem();
+        Object arbitroLB=cboPartido_ArbitroLB.getSelectedItem();
+        Object arbitroD=cboPartido_ArbitroD.getSelectedItem();
+        
+        if(seleccionA.equals(seleccionB) 
+                || arbitroA.equals(arbitroLA) 
+                || arbitroA.equals(arbitroLB) 
+                || arbitroA.equals(arbitroD) 
+                || arbitroLA.equals(arbitroLB)
+                || arbitroLA.equals(arbitroD)
+                || arbitroLB.equals(arbitroD)){
+            JOptionPane.showMessageDialog(this, "Existen elementos repetidos. Verifique seleccion Selecciones y Arbitros");
+        }else{
+            Seleccion s1=(Seleccion)seleccionA;
+            Seleccion s2=(Seleccion)seleccionB;
+            Arbitro aA=(Arbitro)arbitroA;
+            Arbitro aLA=(Arbitro)arbitroLA;
+            Arbitro aLB=(Arbitro)arbitroLB;
+            Arbitro aD=(Arbitro)arbitroD;
+            p=new Partido();
+            p.setIdSeleccion1(s1.getId());
+            p.setIdSeleccion2(s2.getId());
+            p.setArbitro(aA.getId());
+            p.setArbitroL1(aLA.getId());
+            p.setArbitroL2(aLB.getId());
+            p.setCuartoArbitro(aD.getId());
+            p.setPublico((Integer)spPartido_Publico.getValue());
+            p.setDia(spPartido_Dia.getValue().toString());
+            p.setMes(spPartido_Mes.getValue().toString());
+            p.setHoraInicio(spPartido_InicioHora.getValue().toString());
+            p.setHoraTermino(spPartido_TerminoHora.getValue().toString());
+            p.setMinInicio(spPartido_InicioMinuto.getValue().toString());
+            p.setMinTermino(spPartido_TerminoMinuto.getValue().toString());
+            Fase f=(Fase)cboPartido_Fase.getSelectedItem();
+            p.setFase(f.getId());
+            
+            Estadio estadio=(Estadio)cboPartido_Estadio.getSelectedItem();
+            p.setIdEstadio(estadio.getId());
+            
+            try {
+                d.crearPartido(p);
+                JOptionPane.showMessageDialog(this, "Partido creado");
+                cargarTablaPartidos(d.getPartidos());
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(this, "Error al crear Partido: "+e.getMessage());
+            } catch(NumberFormatException ex){
+                JOptionPane.showMessageDialog(this, "Ingrese datos validos");
+            }
+        }
     }//GEN-LAST:event_btnPartido_CrearActionPerformed
 
     private void btnPartidoActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPartidoActualizarActionPerformed
-        // TODO add your handling code here:
+        Partido p;
+        Object seleccionA=cboPartido_SeleccionA.getSelectedItem();
+        Object seleccionB=cboPartido_SeleccionB.getSelectedItem();
+        Object arbitroA=cboPartido_ArbitroA.getSelectedItem();
+        Object arbitroLA=cboPartido_ArbitroLA.getSelectedItem();
+        Object arbitroLB=cboPartido_ArbitroLB.getSelectedItem();
+        Object arbitroD=cboPartido_ArbitroD.getSelectedItem();
+        
+        if(seleccionA.equals(seleccionB) 
+                || arbitroA.equals(arbitroLA) 
+                || arbitroA.equals(arbitroLB) 
+                || arbitroA.equals(arbitroD) 
+                || arbitroLA.equals(arbitroLB)
+                || arbitroLA.equals(arbitroD)
+                || arbitroLB.equals(arbitroD)){
+            JOptionPane.showMessageDialog(this, "Existen elementos repetidos. Verifique seleccion Selecciones y Arbitros");
+        }else{
+            Seleccion s1=(Seleccion)seleccionA;
+            Seleccion s2=(Seleccion)seleccionB;
+            Arbitro aA=(Arbitro)arbitroA;
+            Arbitro aLA=(Arbitro)arbitroLA;
+            Arbitro aLB=(Arbitro)arbitroLB;
+            Arbitro aD=(Arbitro)arbitroD;
+            p=new Partido();
+            p.setId(Integer.parseInt(txtPartido_ID.getText()));
+            p.setIdSeleccion1(s1.getId());
+            p.setIdSeleccion2(s2.getId());
+            p.setArbitro(aA.getId());
+            p.setArbitroL1(aLA.getId());
+            p.setArbitroL2(aLB.getId());
+            p.setCuartoArbitro(aD.getId());
+            p.setPublico((Integer)spPartido_Publico.getValue());
+            p.setDia(spPartido_Dia.getValue().toString());
+            p.setMes(spPartido_Mes.getValue().toString());
+            p.setHoraInicio(spPartido_InicioHora.getValue().toString());
+            p.setHoraTermino(spPartido_TerminoHora.getValue().toString());
+            p.setMinInicio(spPartido_InicioMinuto.getValue().toString());
+            p.setMinTermino(spPartido_TerminoMinuto.getValue().toString());
+            Fase f=(Fase)cboPartido_Fase.getSelectedItem();
+            p.setFase(f.getId());
+            
+            Estadio estadio=(Estadio)cboPartido_Estadio.getSelectedItem();
+            p.setIdEstadio(estadio.getId());
+            
+            try {
+                d.actualizarPartido(p);
+                JOptionPane.showMessageDialog(this, "Partido actualizado");
+                cargarTablaPartidos(d.getPartidos());
+                btnPartidoCancelar.doClick();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(this, "Error al actualizar Partido: "+e.getMessage());
+            } catch(NumberFormatException ex){
+                JOptionPane.showMessageDialog(this, "Ingrese datos validos");
+            }
+        }
     }//GEN-LAST:event_btnPartidoActualizarActionPerformed
 
     private void btnPartidoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPartidoCancelarActionPerformed
-        // TODO add your handling code here:
+        tabPartidos.clearSelection();
+        txtPartido_ID.setText(null);
+        txtPartidoBusqueda.setText(null);
+        cboPartido_SeleccionA.setSelectedIndex(0);
+        cboPartido_SeleccionB.setSelectedIndex(0);
+        cboPartido_ArbitroA.setSelectedIndex(0);
+        cboPartido_ArbitroLA.setSelectedIndex(0);
+        cboPartido_ArbitroLB.setSelectedIndex(0);
+        cboPartido_ArbitroD.setSelectedIndex(0);
+        cboPartido_Estadio.setSelectedIndex(0);
+        cboPartido_Fase.setSelectedIndex(0);
+        spPartido_Dia.setValue(1);
+        spPartido_InicioHora.setValue(0);
+        spPartido_InicioMinuto.setValue(0);
+        spPartido_Mes.setValue("Enero");
+        spPartido_Publico.setValue(0);
+        spPartido_TerminoHora.setValue(0);
+        spPartido_TerminoMinuto.setValue(0);
+        
+        btnPartido_Crear.setEnabled(true);
+        btnPartidoEliminar.setEnabled(false);
+        btnPartidoActualizar.setEnabled(false);
+        btnPartidoCancelar.setEnabled(false);
     }//GEN-LAST:event_btnPartidoCancelarActionPerformed
 
     private void btnPartidoEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPartidoEliminarActionPerformed
-        // TODO add your handling code here:
+        try {
+            int id=Integer.parseInt(txtPartido_ID.getText());
+            d.eliminarPartido(id);
+            cargarTablaPartidos(d.getPartidos());
+            btnPartidoCancelar.doClick();
+            JOptionPane.showMessageDialog(this, "Partido ha sido eliminado");
+        } catch (SQLException ex) {
+            Logger.getLogger(AppCA.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnPartidoEliminarActionPerformed
 
     private void tabPartidosMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabPartidosMouseReleased
@@ -862,6 +1021,16 @@ public class AppCA extends javax.swing.JFrame {
                     }
                 }
                 
+                Fase f=d.getFase(p.getFase());
+                int iCBOFase=cboPartido_Fase.getItemCount();
+                for(int i=0; i<iCBOFase; i++){
+                    String nombreObj=cboPartido_Fase.getItemAt(i).toString();
+                    String nombre=f.toString();
+                    if(nombreObj.equalsIgnoreCase(nombre)){
+                        cboPartido_Fase.setSelectedIndex(i);
+                    }
+                }
+                
                 int mes=Integer.parseInt(p.getMes());
                 String mesString=null;
                 
@@ -931,6 +1100,16 @@ public class AppCA extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tabPartidosMouseReleased
 
+    private void txtPartidoBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPartidoBusquedaKeyReleased
+        try {
+            String filtro=txtPartidoBusqueda.getText();
+            List<Partido> lista=d.buscarPartidos(filtro);
+            cargarTablaPartidos(lista);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error para buscar: "+e.getMessage());
+        }        
+    }//GEN-LAST:event_txtPartidoBusquedaKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -978,6 +1157,7 @@ public class AppCA extends javax.swing.JFrame {
     private javax.swing.JComboBox<Object> cboPartido_ArbitroLA;
     private javax.swing.JComboBox<Object> cboPartido_ArbitroLB;
     private javax.swing.JComboBox<Object> cboPartido_Estadio;
+    private javax.swing.JComboBox<Object> cboPartido_Fase;
     private javax.swing.JComboBox<Object> cboPartido_SeleccionA;
     private javax.swing.JComboBox<Object> cboPartido_SeleccionB;
     private javax.swing.JLabel jLabel1;
@@ -995,6 +1175,7 @@ public class AppCA extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1087,6 +1268,7 @@ public class AppCA extends javax.swing.JFrame {
         actualizarCBOsSeleccion();
         actualizarCBOsArbitros();
         actualizarCBOsEstadio();
+        actualizarCBOFases();
         btnPartidoCancelar.doClick();       
     }
 
@@ -1146,6 +1328,20 @@ public class AppCA extends javax.swing.JFrame {
         } catch (Exception e) {
             System.out.println("Error cargar CBOestadios: "+e.getMessage());
         }          
+    }
+
+    private void actualizarCBOFases() {
+        try {
+            List<Fase> fases=d.getFases();
+            cboPartido_Fase.removeAllItems();
+            
+            cboPartido_Fase.addItem("Seleccione fase..");
+            for(Fase f: fases){
+                cboPartido_Fase.addItem(f);
+            }
+        } catch (Exception e) {
+            System.out.println("Error cargar CBOFases: "+e.getMessage());
+        }        
     }
 
 }
