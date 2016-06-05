@@ -8,6 +8,7 @@ package gui;
 import bd.Conexion;
 import bd.Data;
 import static com.sun.corba.se.impl.util.Utility.printStackTrace;
+import com.sun.javafx.image.impl.IntArgb;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -33,7 +34,7 @@ public class AppCA extends javax.swing.JFrame {
             iniciar();
             setLocationRelativeTo(null);
         } catch (SQLException ex) {
-            System.out.println("Error de conexion"+ex.getMessage());
+            System.out.println("Error de conexion: "+ex.getMessage());
         }
     }
 
@@ -47,6 +48,43 @@ public class AppCA extends javax.swing.JFrame {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabPartidos = new javax.swing.JTable();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        txtPartido_ID = new javax.swing.JTextField();
+        btnPartido_Crear = new javax.swing.JButton();
+        btnPartidoActualizar = new javax.swing.JButton();
+        btnPartidoCancelar = new javax.swing.JButton();
+        btnPartidoEliminar = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        cboPartido_SeleccionA = new javax.swing.JComboBox<>();
+        cboPartido_SeleccionB = new javax.swing.JComboBox<>();
+        cboPartido_ArbitroA = new javax.swing.JComboBox<>();
+        cboPartido_ArbitroLA = new javax.swing.JComboBox<>();
+        cboPartido_ArbitroLB = new javax.swing.JComboBox<>();
+        cboPartido_ArbitroD = new javax.swing.JComboBox<>();
+        cboPartido_Estadio = new javax.swing.JComboBox<>();
+        spPartido_Publico = new javax.swing.JSpinner();
+        spPartido_TerminoHora = new javax.swing.JSpinner();
+        spPartido_TerminoMinuto = new javax.swing.JSpinner();
+        spPartido_InicioHora = new javax.swing.JSpinner();
+        spPartido_InicioMinuto = new javax.swing.JSpinner();
+        spPartido_Dia = new javax.swing.JSpinner();
+        spPartido_Mes = new javax.swing.JSpinner();
+        jLabel22 = new javax.swing.JLabel();
+        txtPartidoBusqueda = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabDT = new javax.swing.JTable();
@@ -73,11 +111,268 @@ public class AppCA extends javax.swing.JFrame {
         btnEliminarDT = new javax.swing.JButton();
         txtBusqueda = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        tabPartidos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tabPartidos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tabPartidosMouseReleased(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tabPartidos);
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos"));
+
+        jLabel10.setText("ID");
+
+        txtPartido_ID.setEditable(false);
+
+        btnPartido_Crear.setText("Crear");
+        btnPartido_Crear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPartido_CrearActionPerformed(evt);
+            }
+        });
+
+        btnPartidoActualizar.setText("Actualizar");
+        btnPartidoActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPartidoActualizarActionPerformed(evt);
+            }
+        });
+
+        btnPartidoCancelar.setText("Cancelar");
+        btnPartidoCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPartidoCancelarActionPerformed(evt);
+            }
+        });
+
+        btnPartidoEliminar.setText("Eliminar");
+        btnPartidoEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPartidoEliminarActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setText("Seleccion 1");
+
+        jLabel12.setText("Seleccion 2");
+
+        jLabel13.setText("1er Arbitro");
+
+        jLabel14.setText("Arbitro Lateral 1");
+
+        jLabel15.setText("Arbitro Lateral 2");
+
+        jLabel16.setText("Cuarto Arbitro");
+
+        jLabel17.setText("Estadio");
+
+        jLabel18.setText("Fecha");
+
+        jLabel19.setText("Publico");
+
+        jLabel20.setText("Hora inicio");
+
+        jLabel21.setText("Hora Termino");
+
+        cboPartido_SeleccionA.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        cboPartido_SeleccionB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        cboPartido_ArbitroA.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        cboPartido_ArbitroLA.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        cboPartido_ArbitroLB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        cboPartido_ArbitroD.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        cboPartido_Estadio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        spPartido_TerminoHora.setModel(new javax.swing.SpinnerNumberModel(0, 0, 23, 1));
+
+        spPartido_TerminoMinuto.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
+
+        spPartido_InicioHora.setModel(new javax.swing.SpinnerNumberModel(0, 0, 23, 1));
+
+        spPartido_InicioMinuto.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
+
+        spPartido_Dia.setModel(new javax.swing.SpinnerNumberModel(1, 1, 31, 1));
+
+        spPartido_Mes.setModel(new javax.swing.SpinnerListModel(new String[] {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"}));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnPartido_Crear, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel17)
+                            .addComponent(jLabel19)
+                            .addComponent(jLabel18)
+                            .addComponent(jLabel20)
+                            .addComponent(jLabel21))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cboPartido_Estadio, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtPartido_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(spPartido_InicioHora, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(spPartido_InicioMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(spPartido_Dia, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(spPartido_Mes, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cboPartido_ArbitroD, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cboPartido_ArbitroLB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cboPartido_ArbitroLA, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cboPartido_ArbitroA, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(spPartido_TerminoHora, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(spPartido_TerminoMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cboPartido_SeleccionA, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cboPartido_SeleccionB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(spPartido_Publico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnPartidoActualizar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(btnPartidoCancelar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnPartidoEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(txtPartido_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel11))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cboPartido_SeleccionA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cboPartido_SeleccionB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(cboPartido_ArbitroA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel14)
+                    .addComponent(cboPartido_ArbitroLA, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel15)
+                    .addComponent(cboPartido_ArbitroLB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(cboPartido_ArbitroD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel17)
+                    .addComponent(cboPartido_Estadio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(spPartido_Publico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel19))
+                .addGap(5, 5, 5)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(spPartido_Dia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spPartido_Mes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(spPartido_InicioHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spPartido_InicioMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel20))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(spPartido_TerminoHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spPartido_TerminoMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel21))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnPartido_Crear)
+                    .addComponent(btnPartidoActualizar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnPartidoCancelar)
+                    .addComponent(btnPartidoEliminar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jLabel22.setText("Busqueda");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel22)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtPartidoBusqueda)))
+                .addGap(14, 14, 14))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel22)
+                    .addComponent(txtPartidoBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Partidos", jPanel1);
 
         tabDT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -280,16 +575,16 @@ public class AppCA extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addGap(18, 18, 18)
                         .addComponent(txtBusqueda)))
-                .addGap(50, 50, 50))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,51 +593,22 @@ public class AppCA extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Director Tecnico", jPanel2);
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(jTable1);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(194, 194, 194)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(104, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 116, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Partidos", jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jTabbedPane1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -402,7 +668,7 @@ public class AppCA extends javax.swing.JFrame {
                 btnCancelarDT.setEnabled(true);
                 btnActualizarDT.setEnabled(true);
             } catch (SQLException e) {
-                
+                System.out.println(e.getMessage());
             }
         }        
     }//GEN-LAST:event_tabDTMouseReleased
@@ -472,6 +738,8 @@ public class AppCA extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Se ha actualizado DT");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Error para actualizar DT: "+ex.getMessage());
+        }catch(ClassCastException e){
+            JOptionPane.showMessageDialog(this, "Seleccione un valor válido");
         }
     }//GEN-LAST:event_btnActualizarDTActionPerformed
 
@@ -501,6 +769,167 @@ public class AppCA extends javax.swing.JFrame {
     private void txtBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBusquedaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBusquedaActionPerformed
+
+    private void btnPartido_CrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPartido_CrearActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPartido_CrearActionPerformed
+
+    private void btnPartidoActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPartidoActualizarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPartidoActualizarActionPerformed
+
+    private void btnPartidoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPartidoCancelarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPartidoCancelarActionPerformed
+
+    private void btnPartidoEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPartidoEliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPartidoEliminarActionPerformed
+
+    private void tabPartidosMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabPartidosMouseReleased
+        if(evt.getClickCount()==1){
+            try {
+                int fila=tabPartidos.getSelectedRow();
+                int id=(int)tabPartidos.getValueAt(fila, 0);
+                Partido p=d.getPartido(id);                
+                txtPartido_ID.setText(Integer.toString(p.getId()));
+                
+                Seleccion s1=d.getSeleccion(p.getIdSeleccion1());
+                int iCbo=cboPartido_SeleccionA.getItemCount();
+                for(int i=0; i<iCbo;i++){
+                    String nombreObj=cboPartido_SeleccionA.getItemAt(i).toString();
+                    if(nombreObj.equalsIgnoreCase(s1.getPaisStr())){
+                        cboPartido_SeleccionA.setSelectedIndex(i);
+                    }
+                }
+                
+                Seleccion s2=d.getSeleccion(p.getIdSeleccion2());
+                iCbo=cboPartido_SeleccionB.getItemCount();
+                for(int i=0; i<iCbo;i++){
+                    String nombreObj=cboPartido_SeleccionB.getItemAt(i).toString();
+                    if(nombreObj.equalsIgnoreCase(s2.getPaisStr())){
+                        cboPartido_SeleccionB.setSelectedIndex(i);
+                    }
+                }      
+                
+                Arbitro a1=d.getArbitro(p.getArbitro());
+                int iCboA=cboPartido_ArbitroA.getItemCount();
+                for(int i=0; i<iCboA; i++){
+                    String nombreObj=cboPartido_ArbitroA.getItemAt(i).toString();
+                    String nombre=a1.toString();
+                    if(nombreObj.equalsIgnoreCase(nombre)){
+                        cboPartido_ArbitroA.setSelectedIndex(i);
+                    }
+                }
+                
+                Arbitro aL1=d.getArbitro(p.getArbitroL1());
+                int iCboLA=cboPartido_ArbitroLA.getItemCount();
+                for(int i=0; i<iCboLA; i++){
+                    String nombreObj=cboPartido_ArbitroLA.getItemAt(i).toString();
+                    String nombre=aL1.toString();
+                    if(nombreObj.equalsIgnoreCase(nombre)){
+                        cboPartido_ArbitroLA.setSelectedIndex(i);
+                    }
+                }                
+                
+                Arbitro aL2=d.getArbitro(p.getArbitroL2());
+                int iCboLB=cboPartido_ArbitroLB.getItemCount();
+                for(int i=0; i<iCboLB; i++){
+                    String nombreObj=cboPartido_ArbitroLB.getItemAt(i).toString();
+                    String nombre=aL2.toString();
+                    if(nombreObj.equalsIgnoreCase(nombre)){
+                        cboPartido_ArbitroLB.setSelectedIndex(i);
+                    }
+                }
+                
+                Arbitro a4=d.getArbitro(p.getCuartoArbitro());
+                int iCboD=cboPartido_ArbitroD.getItemCount();
+                for(int i=0; i<iCboD; i++){
+                    String nombreObj=cboPartido_ArbitroD.getItemAt(i).toString();
+                    String nombre=a4.toString();
+                    if(nombreObj.equalsIgnoreCase(nombre)){
+                        cboPartido_ArbitroD.setSelectedIndex(i);
+                    }
+                } 
+                
+                Estadio es=d.getEstadio(p.getIdEstadio());
+                int iCboEstadio=cboPartido_Estadio.getItemCount();
+                for(int i=0; i<iCboEstadio; i++){
+                    String nombreObj=cboPartido_Estadio.getItemAt(i).toString();
+                    String nombre=es.toString();
+                    if(nombreObj.equalsIgnoreCase(nombre)){
+                        cboPartido_Estadio.setSelectedIndex(i);
+                    }
+                }
+                
+                int mes=Integer.parseInt(p.getMes());
+                String mesString=null;
+                
+                switch(mes){
+                    case 1:
+                        mesString="Enero";
+                        break;
+                    case 2:
+                        mesString="Febrero";
+                        break;
+                    case 3:
+                        mesString="Marzo";
+                        break;
+                    case 4:
+                        mesString="Abril";
+                        break;
+                    case 5:
+                        mesString="Mayo";
+                        break;
+                    case 6:
+                        mesString="Junio";
+                        break;
+                    case 7:
+                        mesString="Julio";
+                        break;
+                    case 8:
+                        mesString="Agosto";
+                        break;
+                    case 9:
+                        mesString="Septiembre";
+                        break;
+                    case 10:
+                        mesString="Octubre";
+                        break;
+                    case 11:
+                        mesString="Noviembre";
+                        break;
+                    case 12:
+                        mesString="Diciembre";
+                        break;
+                }
+                
+                spPartido_Mes.setValue(mesString);
+                int dia=Integer.parseInt(p.getDia());
+                spPartido_Dia.setValue(dia);
+                
+                int h1=Integer.parseInt(p.getHoraInicio());
+                spPartido_InicioHora.setValue(h1);
+                int m1=Integer.parseInt(p.getMinInicio());
+                spPartido_InicioMinuto.setValue(m1);
+                int h2=Integer.parseInt(p.getHoraTermino());
+                spPartido_TerminoHora.setValue(h2);
+                int m2=Integer.parseInt(p.getMinTermino());
+                spPartido_TerminoMinuto.setValue(m2);
+                
+                int publico=p.getPublico();
+                spPartido_Publico.setValue(publico);
+                
+                btnPartidoActualizar.setEnabled(true);
+                btnPartidoCancelar.setEnabled(true);
+                btnPartidoEliminar.setEnabled(true);
+                btnPartido_Crear.setEnabled(false);
+                
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+    }//GEN-LAST:event_tabPartidosMouseReleased
 
     /**
      * @param args the command line arguments
@@ -538,10 +967,34 @@ public class AppCA extends javax.swing.JFrame {
     private javax.swing.JButton btnCancelarDT;
     private javax.swing.JButton btnCrearDT;
     private javax.swing.JButton btnEliminarDT;
+    private javax.swing.JButton btnPartidoActualizar;
+    private javax.swing.JButton btnPartidoCancelar;
+    private javax.swing.JButton btnPartidoEliminar;
+    private javax.swing.JButton btnPartido_Crear;
     private javax.swing.JComboBox<Object> cbDT_Club;
     private javax.swing.JComboBox<Object> cbDT_Nacionalidad;
+    private javax.swing.JComboBox<Object> cboPartido_ArbitroA;
+    private javax.swing.JComboBox<Object> cboPartido_ArbitroD;
+    private javax.swing.JComboBox<Object> cboPartido_ArbitroLA;
+    private javax.swing.JComboBox<Object> cboPartido_ArbitroLB;
+    private javax.swing.JComboBox<Object> cboPartido_Estadio;
+    private javax.swing.JComboBox<Object> cboPartido_SeleccionA;
+    private javax.swing.JComboBox<Object> cboPartido_SeleccionB;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -552,31 +1005,38 @@ public class AppCA extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JSpinner spDT_Anos;
     private javax.swing.JSpinner spDT_Edad;
+    private javax.swing.JSpinner spPartido_Dia;
+    private javax.swing.JSpinner spPartido_InicioHora;
+    private javax.swing.JSpinner spPartido_InicioMinuto;
+    private javax.swing.JSpinner spPartido_Mes;
+    private javax.swing.JSpinner spPartido_Publico;
+    private javax.swing.JSpinner spPartido_TerminoHora;
+    private javax.swing.JSpinner spPartido_TerminoMinuto;
     private javax.swing.JTable tabDT;
+    private javax.swing.JTable tabPartidos;
     private javax.swing.JTextField txtBusqueda;
     private javax.swing.JTextField txtDT_Apellido;
     private javax.swing.JTextField txtDT_ID;
     private javax.swing.JTextField txtDT_Nombre;
     private javax.swing.JTextField txtDT_Sueldo;
+    private javax.swing.JTextField txtPartidoBusqueda;
+    private javax.swing.JTextField txtPartido_ID;
     // End of variables declaration//GEN-END:variables
 
     private void iniciar() throws SQLException {
-        cargarTablaDT(d.getDTs());
-        actualizarCBONacionalidad();
-        actualizarCBOClubDeportivo();
-        btnCancelarDT.doClick();
-//        cargarTablaPartidos();
+        cargarComponentesDT();
+        cargarComponentesPartidos();        
     }
 
-    private void cargarTablaPartidos() throws SQLException{
-//        TMPartido modeloPartidos=new TMPartido(d.getPartidos());
-//        tbl_Partidos.setModel(modeloPartidos);
+    private void cargarTablaPartidos(List<Partido> lista) throws SQLException{
+        TMPartido modeloPartidos=new TMPartido(lista);
+        tabPartidos.setModel(modeloPartidos);
     }
 
     private void cargarTablaDT(List<DT> dts) throws SQLException{
@@ -592,6 +1052,7 @@ public class AppCA extends javax.swing.JFrame {
             List<Nacionalidad> paises=d.getNacionalidades();
             cbDT_Nacionalidad.removeAllItems();
             
+            cbDT_Nacionalidad.addItem("Seleccione Nacionalidad...");
             for(Nacionalidad n: paises){
                 cbDT_Nacionalidad.addItem(n);
             }
@@ -605,12 +1066,86 @@ public class AppCA extends javax.swing.JFrame {
             List<ClubDeportivo> clubes=d.getClubDeportivos();
             cbDT_Club.removeAllItems();
             
+            cbDT_Club.addItem("Seleccione club deportivo...");
             for(ClubDeportivo club: clubes){
                 cbDT_Club.addItem(club);
             }
         } catch (Exception e) {
             System.out.println("Error cargar cbDT_Club: "+e.getMessage());
         }        
+    }
+
+    private void cargarComponentesDT() throws SQLException{
+        cargarTablaDT(d.getDTs());
+        actualizarCBONacionalidad();
+        actualizarCBOClubDeportivo();
+        btnCancelarDT.doClick();        
+    }
+
+    private void cargarComponentesPartidos() throws SQLException{
+        cargarTablaPartidos(d.getPartidos());
+        actualizarCBOsSeleccion();
+        actualizarCBOsArbitros();
+        actualizarCBOsEstadio();
+        btnPartidoCancelar.doClick();       
+    }
+
+    private void actualizarCBOsSeleccion() {
+        try {
+            List<Seleccion> selecciones=d.getSelecciones();
+            cboPartido_SeleccionA.removeAllItems();
+            cboPartido_SeleccionB.removeAllItems();
+            
+            cboPartido_SeleccionA.addItem("Seleccione seleccion...");
+            for(Seleccion s: selecciones){
+                cboPartido_SeleccionA.addItem(s);
+            }
+            
+            cboPartido_SeleccionB.addItem("Seleccione seleccion...");
+            for(Seleccion s: selecciones){
+                cboPartido_SeleccionB.addItem(s);
+            }       
+                            
+        } catch (Exception e) {
+            System.out.println("Error cargar ComboboxSelecciones: "+e.getMessage());
+        }        
+    }
+
+    private void actualizarCBOsArbitros() {
+        try {
+            List<Arbitro> arbitros=d.getArbitros();
+            cboPartido_ArbitroA.removeAllItems();
+            cboPartido_ArbitroD.removeAllItems();
+            cboPartido_ArbitroLA.removeAllItems();
+            cboPartido_ArbitroLB.removeAllItems();
+            
+            cboPartido_ArbitroA.addItem("Seleccione arbitro...");
+            cboPartido_ArbitroD.addItem("Seleccione arbitro...");
+            cboPartido_ArbitroLA.addItem("Seleccione arbitro...");
+            cboPartido_ArbitroLB.addItem("Seleccione arbitro...");
+            for(Arbitro a: arbitros){
+                cboPartido_ArbitroA.addItem(a);
+                cboPartido_ArbitroD.addItem(a);
+                cboPartido_ArbitroLA.addItem(a);
+                cboPartido_ArbitroLB.addItem(a);
+            }
+        } catch (Exception e) {
+            System.out.println("Error cargar CBOSelecciones: "+e.getMessage());
+        }          
+    }
+
+    private void actualizarCBOsEstadio() {
+        try {
+            List<Estadio> estadios=d.getEstadios();
+            cboPartido_Estadio.removeAllItems();
+            
+            cboPartido_Estadio.addItem("Seleccione estadio..");
+            for(Estadio e: estadios){
+                cboPartido_Estadio.addItem(e);
+            }
+        } catch (Exception e) {
+            System.out.println("Error cargar CBOestadios: "+e.getMessage());
+        }          
     }
 
 }

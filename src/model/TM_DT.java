@@ -5,7 +5,6 @@
  */
 package model;
 
-import bd.Data;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -19,11 +18,9 @@ import javax.swing.table.TableModel;
  */
 public class TM_DT implements TableModel{
     private List<DT> dts;
-    private Data d;
 
     public TM_DT(List<DT> dts) throws SQLException {
         this.dts = dts;
-        d=new Data();
     }
 
     @Override

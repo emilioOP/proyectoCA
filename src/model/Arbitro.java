@@ -11,6 +11,11 @@ package model;
  */
 public class Arbitro {
     private int id;
+    private String nombre;
+    private String apellido;
+    private int edad;
+    private String posision;
+    private int pais;    
 
     public int getId() {
         return id;
@@ -19,11 +24,7 @@ public class Arbitro {
     public void setId(int id) {
         this.id = id;
     }
-    private String nombre;
-    private String apellido;
-    private int edad;
-    private String posision;
-    private int pais;
+
 
     public Arbitro() {
     }
@@ -67,6 +68,13 @@ public class Arbitro {
     public void setPais(int pais) {
         this.pais = pais;
     }
+
+    @Override
+    public String toString() {
+        return this.nombre+" "+this.apellido;
+    }
+    
+    
     
     
 }

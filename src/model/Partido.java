@@ -19,12 +19,33 @@ public class Partido {
     private int cuartoArbitro;
     private int idEstadio;
     private int publico;
-    private String fecha;
+    private String dia;
+    private String mes;
     private String horaInicio;
+    private String minInicio;    
     private String horaTermino;
+    private String minTermino;
     private int fase;
 
-    public Partido() {
+    public Partido() {}
+
+    public Partido(int id, int idSeleccion1, int idSeleccion2, int arbitro, int arbitroL1, int arbitroL2, int cuartoArbitro, int idEstadio, int publico, String dia, String mes, String horaInicio, String inInicio, String horaTermino, String minTermino, int fase) {
+        this.id = id;
+        this.idSeleccion1 = idSeleccion1;
+        this.idSeleccion2 = idSeleccion2;
+        this.arbitro = arbitro;
+        this.arbitroL1 = arbitroL1;
+        this.arbitroL2 = arbitroL2;
+        this.cuartoArbitro = cuartoArbitro;
+        this.idEstadio = idEstadio;
+        this.publico = publico;
+        this.dia = dia;
+        this.mes = mes;
+        this.horaInicio = horaInicio;
+        this.minInicio = inInicio;
+        this.horaTermino = horaTermino;
+        this.minTermino = minTermino;
+        this.fase = fase;
     }
 
     public int getId() {
@@ -99,12 +120,20 @@ public class Partido {
         this.publico = publico;
     }
 
-    public String getFecha() {
-        return fecha;
+    public String getDia() {
+        return dia;
     }
 
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
+    public void setDia(String dia) {
+        this.dia = dia;
+    }
+
+    public String getMes() {
+        return mes;
+    }
+
+    public void setMes(String mes) {
+        this.mes = mes;
     }
 
     public String getHoraInicio() {
@@ -115,12 +144,28 @@ public class Partido {
         this.horaInicio = horaInicio;
     }
 
+    public String getMinInicio() {
+        return minInicio;
+    }
+
+    public void setMinInicio(String minInicio) {
+        this.minInicio = minInicio;
+    }
+
     public String getHoraTermino() {
         return horaTermino;
     }
 
     public void setHoraTermino(String horaTermino) {
         this.horaTermino = horaTermino;
+    }
+
+    public String getMinTermino() {
+        return minTermino;
+    }
+
+    public void setMinTermino(String minTermino) {
+        this.minTermino = minTermino;
     }
 
     public int getFase() {
@@ -130,6 +175,6 @@ public class Partido {
     public void setFase(int fase) {
         this.fase = fase;
     }
-    
-    
+
+        
 }

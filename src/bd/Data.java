@@ -24,6 +24,8 @@ public class Data {
     private List<Arbitro> arbitros;
     private List<ClubDeportivo> clubes;
     private List<Nacionalidad> nacionalidades;
+    private List<Seleccion> selecciones;
+    private List<Estadio> estadios;
     
     public Data()throws SQLException{
         c = new Conexion(
@@ -34,7 +36,7 @@ public class Data {
         );
     }
     
-    public void crearPartido(Partido p) throws SQLException{
+    public void crearPartido(Partido p) throws SQLException{        
         query="insert into tbl_partidos values("
                 + ""+p.getIdSeleccion1()+","
                 + ""+p.getIdSeleccion2()+","
@@ -44,9 +46,9 @@ public class Data {
                 + ""+p.getCuartoArbitro()+","
                 + ""+p.getIdEstadio()+","
                 + ""+p.getPublico()+","
-                + ""+p.getFecha()+","
-                + ""+p.getHoraInicio()+", "
-                + ""+p.getHoraTermino()+","
+                + "'2016/"+p.getMes()+"/"+p.getDia()+"',"
+                + "'"+p.getHoraInicio()+":"+p.getMinInicio()+":0', "
+                + "'"+p.getHoraTermino()+":"+p.getMinTermino()+":0', "
                 + ""+p.getFase()+""
                 + ");";
 //        System.out.println(query);
@@ -105,19 +107,20 @@ public class Data {
     
     public void actualizarPartido(Partido p) throws SQLException{
         query="update tbl_partidos set "
-                + "idSeleccion1="+p.getIdSeleccion1()+", "
-                + "idSeleccion2="+p.getIdSeleccion2()+", "
-                + "arbitro="+p.getArbitro()+", "
-                + "arbitroL1="+p.getArbitroL1()+", "
-                + "arbitroL2="+p.getArbitroL2()+", "
-                + "cuartoArbitro="+p.getCuartoArbitro()+", "
-                + "estadio="+p.getIdEstadio()+", "
-                + "publicoAsistente="+p.getPublico()+", "
-                + "fecha='"+p.getFecha()+"', "
-                + "horaInicio='"+p.getHoraInicio()+"', "
-                + "horaTermino='"+p.getHoraTermino()+"', "
+                + "idSeleccion1="+p.getIdSeleccion1()+","
+                + "idSeleccion2="+p.getIdSeleccion2()+","
+                + "arbitro="+p.getArbitro()+","
+                + "arbitroL1="+p.getArbitroL1()+","
+                + "arbitroL2="+p.getArbitroL2()+","
+                + "cuartoArbitro="+p.getCuartoArbitro()+","
+                + "estadio="+p.getIdEstadio()+","
+                + "publicoAsistente="+p.getPublico()+","
+                + "fecha='2016/"+p.getMes()+"/"+p.getDia()+"',"
+                + "horaInicio='"+p.getHoraInicio()+":"+p.getMinInicio()+":0', "
+                + "horaTermino='"+p.getHoraTermino()+":"+p.getMinTermino()+":0', "
                 + "fase="+p.getFase()+" "
-                + "where id="+p.getId()+";";
+                + "where id="+p.getId()+"";               
+        
 //        System.out.println(query);
         c.ejecutar(query);
     }
@@ -155,7 +158,24 @@ public class Data {
     
     public Partido getPartido(int id) throws SQLException{
         Partido p=null;
-        query="select*from tbl_partidos where id="+id+"";
+        query="select id, "
+                + "idSeleccion1, "
+                + "idSeleccion2, "
+                + "arbitro, "
+                + "arbitroL1, "
+                + "arbitroL2, "
+                + "cuartoArbitro, "
+                + "estadio, "
+                + "publicoAsistente, "
+                + "DAY(fecha) as 'Dia',"
+                + "MONTH(fecha) as 'Mes',"
+                + "DATEPART(hour, CONVERT(VARCHAR(10), horaInicio, 108)) as 'horaInicio', "
+                + "DATEPART(minute, CONVERT(VARCHAR(10), horaInicio, 108)) as 'MinInicio',"
+                + "DATEPART(hour, CONVERT(VARCHAR(10), horaTermino, 108)) as 'horaTermino', "
+                + "DATEPART(minute, CONVERT(VARCHAR(10), horaTermino, 108)) as 'MinTermino',"
+                + "fase "
+                + "from tbl_partidos "
+                + "where id="+id+"";
 //        System.out.println(query);
         rs=c.ejecutarSelect(query);
         
@@ -170,10 +190,13 @@ public class Data {
             p.setCuartoArbitro(rs.getInt(7));
             p.setIdEstadio(rs.getInt(8));
             p.setPublico(rs.getInt(9));
-            p.setFecha(rs.getString(10));
-            p.setHoraInicio(rs.getString(11));
-            p.setHoraTermino(rs.getString(12));
-            p.setFase(rs.getInt(13));
+            p.setDia(rs.getString(10));
+            p.setMes(rs.getString(11));
+            p.setHoraInicio(rs.getString(12));
+            p.setMinInicio(rs.getString(13));
+            p.setHoraTermino(rs.getString(14));
+            p.setMinTermino(rs.getString(15));
+            p.setFase(rs.getInt(16));
         }
         
         c.desconectar();
@@ -247,12 +270,77 @@ public class Data {
         
         c.desconectar();
         return n;
+    }    
+    public Seleccion getSeleccion(int id) throws SQLException{
+        Seleccion s=null;
+        query="select "
+                + "tbl_Seleccion.id, "
+                + "tbl_Seleccion.cantidadJugadores, "
+                + "tbl_Seleccion.cuerpoTecnico, "
+                + "tbl_Seleccion.estado, "
+                + "tbl_Seleccion.pais, "
+                + "tbl_Seleccion.rankingFIFA, "
+                + "tbl_Seleccion.fase, "
+                + "tbl_Seleccion.id_grupo, "
+                + "tbl_pais.pais "
+                + "from tbl_Seleccion inner join tbl_pais "
+                + "on tbl_pais.id=tbl_Seleccion.pais "
+                + "where tbl_Seleccion.id="+id+"";
+        rs=c.ejecutarSelect(query);
+        
+        if(rs.next()){
+            s=new Seleccion();
+            s.setId(rs.getInt(1));
+            s.setJugadores(rs.getInt(2));
+            s.setCuerpoTecnico(rs.getInt(3));
+            s.setEstado(rs.getBoolean(4));
+            s.setPais(rs.getInt(5));
+            s.setRankingFIFA(rs.getInt(6));
+            s.setFase(rs.getInt(7));
+            s.setGrupo(rs.getInt(8));
+            s.setPaisStr(rs.getString(9));
+        }
+        
+        c.desconectar();
+        return s;
+    }
+    public Estadio getEstadio(int id) throws SQLException{
+        Estadio e=null;
+        query="select*from tbl_estadio where id="+id+"";
+        rs=c.ejecutarSelect(query);
+        
+        if(rs.next()){
+            e=new Estadio();
+            e.setId(rs.getInt(1));
+            e.setNombre(rs.getString(2));
+            e.setLugar(rs.getString(3));
+            e.setCapacidad(rs.getInt(4));
+        }
+        
+        c.desconectar();
+        return e;        
     }
     
     public List<Partido> getPartidos() throws SQLException{
         partidos=new ArrayList<>();
         Partido p;
-        query="select*from tbl_partidos;";
+        query="select id, "
+                + "idSeleccion1, "
+                + "idSeleccion2, "
+                + "arbitro, "
+                + "arbitroL1, "
+                + "arbitroL2, "
+                + "cuartoArbitro, "
+                + "estadio, "
+                + "publicoAsistente, "
+                + "DAY(fecha) as 'Dia',"
+                + "MONTH(fecha) as 'Mes',"
+                + "DATEPART(hour, CONVERT(VARCHAR(10), horaInicio, 108)) as 'horaInicio', "
+                + "DATEPART(minute, CONVERT(VARCHAR(10), horaInicio, 108)) as 'MinInicio',"
+                + "DATEPART(hour, CONVERT(VARCHAR(10), horaTermino, 108)) as 'horaTermino', "
+                + "DATEPART(minute, CONVERT(VARCHAR(10), horaTermino, 108)) as 'MinTermino',"
+                + "fase "
+                + "from tbl_partidos ";
 //        System.out.println(query);
         rs=c.ejecutarSelect(query);
         
@@ -267,10 +355,13 @@ public class Data {
             p.setCuartoArbitro(rs.getInt(7));
             p.setIdEstadio(rs.getInt(8));
             p.setPublico(rs.getInt(9));
-            p.setFecha(rs.getString(10));
-            p.setHoraInicio(rs.getString(11));
-            p.setHoraTermino(rs.getString(12));
-            p.setFase(rs.getInt(13));
+            p.setDia(rs.getString(10));
+            p.setMes(rs.getString(11));
+            p.setHoraInicio(rs.getString(12));
+            p.setMinInicio(rs.getString(13));
+            p.setHoraTermino(rs.getString(14));
+            p.setMinTermino(rs.getString(15));
+            p.setFase(rs.getInt(16));
             partidos.add(p);           
         }
         
@@ -356,24 +447,76 @@ public class Data {
         
         c.desconectar();
         return nacionalidades;
+    }    
+    public List<Seleccion> getSelecciones() throws SQLException{
+        selecciones = new ArrayList<>();
+        Seleccion s;
+        query="select "
+                + "tbl_Seleccion.id, "
+                + "tbl_Seleccion.cantidadJugadores, "
+                + "tbl_Seleccion.cuerpoTecnico, "
+                + "tbl_Seleccion.estado, "
+                + "tbl_Seleccion.pais, "
+                + "tbl_Seleccion.rankingFIFA, "
+                + "tbl_Seleccion.fase, "
+                + "tbl_Seleccion.id_grupo, "
+                + "tbl_pais.pais "
+                + "from tbl_Seleccion inner join tbl_pais "
+                + "on tbl_pais.id=tbl_Seleccion.pais ";
+        rs=c.ejecutarSelect(query);
+        
+        while(rs.next()){            
+            s=new Seleccion();
+            s.setId(rs.getInt(1));
+            s.setJugadores(rs.getInt(2));
+            s.setCuerpoTecnico(rs.getInt(3));
+            s.setEstado(rs.getBoolean(4));
+            s.setPais(rs.getInt(5));
+            s.setRankingFIFA(rs.getInt(6));
+            s.setFase(rs.getInt(7));
+            s.setGrupo(rs.getInt(8));
+            s.setPaisStr(rs.getString(9));
+            selecciones.add(s);
+        }
+        
+        c.desconectar();
+        return selecciones;
+    }   
+    public List<Estadio> getEstadios() throws SQLException{
+        estadios = new ArrayList<>();
+        Estadio e;
+        query="select*from tbl_estadio";
+        rs=c.ejecutarSelect(query);
+        
+        while(rs.next()){            
+            e=new Estadio();  
+            e.setId(rs.getInt(1));
+            e.setNombre(rs.getString(2));
+            e.setLugar(rs.getString(3));
+            e.setCapacidad(rs.getInt(4));            
+            estadios.add(e);
+        }
+        
+        c.desconectar();
+        return estadios;        
     }
     
     public List<Partido> buscarPartidos(String filtro) throws SQLException{
         partidos=new ArrayList<>();
         Partido p;
         query="select*from tbl_partidos where "
-                + "id like '%"+filtro+"%', "
-                + "idSeleccion1 like '%"+filtro+"%', "
-                + "idSeleccion2 like '%"+filtro+"%', "
-                + "arbitro like '%"+filtro+"%', "
-                + "arbitroL1 like '%"+filtro+"%', "
-                + "arbitroL2 like '%"+filtro+"%', "
-                + "cuartoArbitro like '%"+filtro+"%', "
-                + "estado like '%"+filtro+"%', "
-                + "publicoAsistente like '%"+filtro+"%', "
-                + "fecha like '%"+filtro+"%', "
-                + "horaInicio like '%"+filtro+"%', "
-                + "horaTermino like '%"+filtro+"%', "
+                + "id like '%"+filtro+"%' or "
+                + "idSeleccion1 like '%"+filtro+"%' or "
+                + "idSeleccion2 like '%"+filtro+"%' or "
+                + "arbitro like '%"+filtro+"%' or "
+                + "arbitroL1 like '%"+filtro+"%' or "
+                + "arbitroL2 like '%"+filtro+"%' or "
+                + "cuartoArbitro like '%"+filtro+"%' or "
+                + "estado like '%"+filtro+"%' or "
+                + "publicoAsistente like '%"+filtro+"%' or "
+                + "fecha like '%"+filtro+"%' or "
+                + "horaInicio like '%"+filtro+"%' or "
+                + "horaTermino like '%"+filtro+"%' or "
                 + "fase like '%"+filtro+"%'"
                 + ";";
 //        System.out.println(query);
@@ -390,10 +533,13 @@ public class Data {
             p.setCuartoArbitro(rs.getInt(7));
             p.setIdEstadio(rs.getInt(8));
             p.setPublico(rs.getInt(9));
-            p.setFecha(rs.getString(10));
-            p.setHoraInicio(rs.getString(11));
-            p.setHoraTermino(rs.getString(12));
-            p.setFase(rs.getInt(13));
+            p.setDia(rs.getString(10));
+            p.setMes(rs.getString(11));
+            p.setHoraInicio(rs.getString(12));
+            p.setMinInicio(rs.getString(13));
+            p.setHoraTermino(rs.getString(14));
+            p.setMinTermino(rs.getString(15));
+            p.setFase(rs.getInt(16));
             partidos.add(p);           
         }
         
@@ -438,11 +584,11 @@ public class Data {
         Arbitro a;
         
         query="select*from tbl_arbitro where "
-                + "id like '%"+filtro+"%', "
-                + "nombre like '%"+filtro+"%', "
-                + "apellido like '%"+filtro+"%', "
-                + "edad like '%"+filtro+"%', "
-                + "posicion like '%"+filtro+"%', "
+                + "id like '%"+filtro+"%' or "
+                + "nombre like '%"+filtro+"%' or "
+                + "apellido like '%"+filtro+"%' or "
+                + "edad like '%"+filtro+"%' or "
+                + "posicion like '%"+filtro+"%' or "
                 + "pais like '%"+filtro+"%'"
                 + ";";
 //        System.out.println(query);
@@ -467,7 +613,7 @@ public class Data {
         ClubDeportivo cd;
         
         query="select*from tbl_ClubDeportivo where "
-                + "id like '%"+filtro+"%', "
+                + "id like '%"+filtro+"%' or "
                 + "nombre like '%"+filtro+"%'"
                 + ";";
 //        System.out.println(query);
@@ -483,24 +629,6 @@ public class Data {
         c.desconectar();
         return clubes;
     }
-    public List<Nacionalidad> getNacionalidades(String filtro) throws SQLException{
-        nacionalidades = new ArrayList<>();
-        Nacionalidad n;
-        query="select*from tbl_Pais where "
-                + "id like '%"+filtro+"%', "
-                + "pais '%"+filtro+"%'";
-        rs=c.ejecutarSelect(query);
-        
-        int id=0;
-        String pais=null;
-        while(rs.next()){            
-            n=new Nacionalidad(id, pais);
-            nacionalidades.add(n);
-        }
-        
-        c.desconectar();
-        return nacionalidades;        
-    }  
 }
 
 

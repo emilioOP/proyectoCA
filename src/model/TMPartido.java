@@ -5,6 +5,8 @@
  */
 package model;
 
+import bd.Data;
+import java.sql.SQLException;
 import java.util.List;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
@@ -15,9 +17,11 @@ import javax.swing.table.TableModel;
  */
 public class TMPartido implements TableModel{
     private List<Partido> partidos;
+    private Data d;
 
-    public TMPartido(List<Partido> partidos) {
+    public TMPartido(List<Partido> partidos) throws SQLException{
         this.partidos = partidos;
+        d=new Data();
     }
 
     @Override
@@ -27,7 +31,7 @@ public class TMPartido implements TableModel{
 
     @Override
     public int getColumnCount() {
-        return 13;
+        return 3;
     }
 
     @Override
@@ -98,11 +102,26 @@ public class TMPartido implements TableModel{
                 o=p.getId();
                 break;
             case 1:
-                o=p.getIdSeleccion1();
-                //crear objeto seleccion
+                try {
+                    int idS1 = p.getIdSeleccion1();
+                    Seleccion s = d.getSeleccion(idS1);
+                    int idP = s.getPais();
+                    Nacionalidad pais = d.getNacionalidad(idP);
+                    o = pais.getPais();
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                }               
                 break;
             case 2:
-                o=p.getIdSeleccion2();
+                try {
+                    int idS2 = p.getIdSeleccion2();
+                    Seleccion s = d.getSeleccion(idS2);
+                    int idP2 = s.getPais();
+                    Nacionalidad pais2 = d.getNacionalidad(idP2);
+                    o = pais2.getPais();
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                }                    
                 break;
 ////            case 3:
 ////                o=p.getArbitro();
