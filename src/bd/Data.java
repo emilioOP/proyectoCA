@@ -226,6 +226,50 @@ public class Data {
         c.ejecutar(query);
     }
 
+    public void actualizarUsuario(Usuario u) throws SQLException {
+        query = "update tbl_usuario set "
+                + "descripcion ='" + u.getDescripcion() + "', "
+                + "clave ='" + u.getClave() + "', "
+                + "permiso =" + u.getPermiso() + " , "
+                + "where id =" + u.getId() + ";";
+        c.ejecutar(query);
+    }
+
+    public void actualizarJugador(Jugador j) throws SQLException {
+        query = "update tbl_Jugador set "
+                + "nombre ='" + j.getNombre() + "', "
+                + "apellido ='" + j.getApellido() + "', "
+                + "edad =" + j.getEdad() + " , "
+                + "nacionalidad =" + j.getNacionalidad() + " , "
+                + "clubDeportivo ='" + j.getClubDeportivo() + "', "
+                + "estadoFisico =" + j.getEstadoFisico() + " , "
+                + "esTitular =" + j.isTitular() + " , "
+                + "posicion =" + j.getPosicion() + " , "
+                + "nroCamiseta ='" + j.getNroCamiseta() + "', "
+                + "aniosComoJugador =" + j.getAniosComoJugador() + " , "
+                + "goles =" + j.getGoles() + " , "
+                + "atajadas ='" + j.getAtajadas() + "', "
+                + "sueldoFIFA =" + j.getSueldoFIFA() + " , "
+                + "tarjetasRojas =" + j.getTarjetasRojas() + " , "
+                + "tarjetasAmarillas =" + j.getTarjetasAmarillas() + " , "
+                + "estaHabilitado =" + j.isHabilitado() + " , "
+                + "where id =" + j.getId() + ";";
+        c.ejecutar(query);
+    }
+
+    public void actualizarCT(CT ct) throws SQLException {
+        query = "update tbl_usuario set "
+                + "nombre ='" + ct.getNombre() + "', "
+                + "apellido ='" + ct.getApellido() + "', "
+                + "edad =" + ct.getEdad() + " , "
+                + "nacionalidad ='" + ct.getNacionalidad() + "', "
+                + "clubDeportivo ='" + ct.getClubDeportivo() + "', "
+                + "aniosComoDT =" + ct.getAniosComoDT() + " , "
+                + "sueldoFIFA =" + ct.getSueldoFIFA() + " , "
+                + "where id =" + ct.getId() + ";";
+        c.ejecutar(query);
+    }
+
     public Partido getPartido(int id) throws SQLException {
         Partido p = null;
         query = "select id, "
