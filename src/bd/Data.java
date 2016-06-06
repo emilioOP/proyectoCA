@@ -157,6 +157,21 @@ public class Data {
         c.ejecutar(query);
     }
 
+    public void eliminarUsuario(int id) throws SQLException {
+        query = "delete from tbl_usuario where id = " + id;
+        c.ejecutar(query);
+    }
+
+    public void eliminarCT(int id) throws SQLException {
+        query = "delete from tbl_CuerpoTecnico where id =" + id;
+        c.ejecutar(query);
+    }
+
+    public void eliminarJugador(int id) throws SQLException {
+        query = "delete from tbl_Jugador where id = " + id;
+        c.ejecutar(query);
+    }
+
     public void actualizarPartido(Partido p) throws SQLException {
         query = "update tbl_partidos set "
                 + "idSeleccion1=" + p.getIdSeleccion1() + ","
